@@ -2012,6 +2012,32 @@
     },
     {
       "id": "mtqw4kz4215gv",
+      "invoiceNo": "#000088-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtqszf7mn99lk",
+          "name": "Silicon bracelet",
+          "consignor": "",
+          "costPrice": 150,
+          "salePrice": 150,
+          "qty": 4
+        },
+        {
+          "id": "mtq1xww8d0w3z",
+          "name": "Nutella brownie",
+          "consignor": "",
+          "costPrice": 30,
+          "salePrice": 1,
+          "qty": 1
+        }
+      ],
+      "total": 601,
+      "note": "UPI"
+    },
+    {
+      "id": "mtqw4kz4215gv",
       "invoiceNo": "#000089",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
@@ -2055,6 +2081,32 @@
       "note": "Cash"
     },
     {
+      "id": "mtqwgnx4rwk4a",
+      "invoiceNo": "#000090-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtqq259ypk0ec",
+          "name": "Cookie",
+          "consignor": "",
+          "costPrice": 70,
+          "salePrice": 70,
+          "qty": 1
+        },
+        {
+          "id": "mtq1aqgdvrw7c",
+          "name": "Dark chocolate",
+          "consignor": "",
+          "costPrice": 20,
+          "salePrice": 30,
+          "qty": 1
+        }
+      ],
+      "total": 100,
+      "note": "Cash"
+    },
+    {
       "id": "mtqw2r5x8fb07",
       "invoiceNo": "#000091",
       "date": "2026-09-07",
@@ -2071,6 +2123,24 @@
       ],
       "total": 60,
       "note": "UPI"
+    },
+    {
+      "id": "mtqwiiduhu8xd",
+      "invoiceNo": "#000091-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtqq259ypk0ec",
+          "name": "Cookie",
+          "consignor": "",
+          "costPrice": 70,
+          "salePrice": 70,
+          "qty": 1
+        }
+      ],
+      "total": 70,
+      "note": "Cash"
     },
     {
       "id": "mtqwgnx4rwk4a",
@@ -2117,6 +2187,24 @@
       "note": "UPI"
     },
     {
+      "id": "mtqwpddym9jjl",
+      "invoiceNo": "#000093-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtq1yl0l0n2me",
+          "name": "Millionaire brownie",
+          "consignor": "",
+          "costPrice": 32,
+          "salePrice": 50,
+          "qty": 2
+        }
+      ],
+      "total": 100,
+      "note": "Cash"
+    },
+    {
       "id": "mtqwiiduhu8xd",
       "invoiceNo": "#000094",
       "date": "2026-09-07",
@@ -2153,6 +2241,32 @@
       "note": "Cash"
     },
     {
+      "id": "mtqwu0xzaet7j",
+      "invoiceNo": "#000095-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtq15fqr6t6s7",
+          "name": "Gym keychain",
+          "consignor": "",
+          "costPrice": 250,
+          "salePrice": 250,
+          "qty": 1
+        },
+        {
+          "id": "mtq1xww8d0w3z",
+          "name": "Nutella brownie",
+          "consignor": "",
+          "costPrice": 30,
+          "salePrice": 60,
+          "qty": 1
+        }
+      ],
+      "total": 310,
+      "note": "UPI"
+    },
+    {
       "id": "mtqwfodpwwydu",
       "invoiceNo": "#000096",
       "date": "2026-09-07",
@@ -2168,6 +2282,32 @@
         }
       ],
       "total": 200,
+      "note": "Cash"
+    },
+    {
+      "id": "mtqwzcvoj60n9",
+      "invoiceNo": "#000096-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtq1xe47x4ww6",
+          "name": "Triple chocolate brownies",
+          "consignor": "",
+          "costPrice": 30,
+          "salePrice": 60,
+          "qty": 2
+        },
+        {
+          "id": "mtq1a4u9oz9g4",
+          "name": "Milk Chocolates",
+          "consignor": "",
+          "costPrice": 20,
+          "salePrice": 30,
+          "qty": 1
+        }
+      ],
+      "total": 150,
       "note": "Cash"
     },
     {
@@ -2267,6 +2407,24 @@
       "note": "UPI"
     },
     {
+      "id": "mtqx7hd45nsqk",
+      "invoiceNo": "#000100-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtq1yl0l0n2me",
+          "name": "Millionaire brownie",
+          "consignor": "",
+          "costPrice": 32,
+          "salePrice": 50,
+          "qty": 2
+        }
+      ],
+      "total": 100,
+      "note": "Cash"
+    },
+    {
       "id": "mtqwip4chryt7",
       "invoiceNo": "#000101",
       "date": "2026-09-07",
@@ -2282,6 +2440,24 @@
         }
       ],
       "total": 60,
+      "note": "Cash"
+    },
+    {
+      "id": "mtqx7o9klevkj",
+      "invoiceNo": "#000101-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtq1yl0l0n2me",
+          "name": "Millionaire brownie",
+          "consignor": "",
+          "costPrice": 32,
+          "salePrice": 50,
+          "qty": 1
+        }
+      ],
+      "total": 50,
       "note": "Cash"
     },
     {
@@ -2363,6 +2539,24 @@
       "note": "UPI"
     },
     {
+      "id": "mtqxbldn06cvf",
+      "invoiceNo": "#000104-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtqq259ypk0ec",
+          "name": "Cookie",
+          "consignor": "",
+          "costPrice": 70,
+          "salePrice": 70,
+          "qty": 1
+        }
+      ],
+      "total": 70,
+      "note": "Cash"
+    },
+    {
       "id": "mtqx6gp3uyv6s",
       "invoiceNo": "#000105",
       "date": "2026-09-07",
@@ -2404,6 +2598,24 @@
         }
       ],
       "total": 100,
+      "note": "Cash"
+    },
+    {
+      "id": "mtqxdi6om6hhy",
+      "invoiceNo": "#000106-dup",
+      "date": "2026-09-07",
+      "customer": "sanajana",
+      "items": [
+        {
+          "id": "mtqq259ypk0ec",
+          "name": "Cookie",
+          "consignor": "",
+          "costPrice": 70,
+          "salePrice": 70,
+          "qty": 1
+        }
+      ],
+      "total": 70,
       "note": "Cash"
     },
     {
@@ -2451,6 +2663,24 @@
       "note": "Cash"
     },
     {
+      "id": "mtqxhfl3hfedt",
+      "invoiceNo": "#000108-dup",
+      "date": "2026-09-07",
+      "customer": "Tanmay",
+      "items": [
+        {
+          "id": "mtq1xe47x4ww6",
+          "name": "Triple chocolate brownies",
+          "consignor": "",
+          "costPrice": 30,
+          "salePrice": 60,
+          "qty": 1
+        }
+      ],
+      "total": 60,
+      "note": "Cash"
+    },
+    {
       "id": "mtqx7o9klevkj",
       "invoiceNo": "#000109",
       "date": "2026-09-07",
@@ -2467,6 +2697,40 @@
       ],
       "total": 50,
       "note": "Cash"
+    },
+    {
+      "id": "mtqxl2m8bofvy",
+      "invoiceNo": "#000109-dup",
+      "date": "2026-09-07",
+      "customer": "tanmay",
+      "items": [
+        {
+          "id": "mtq196aapwie0",
+          "name": "Dipped cookies Milk chocolate",
+          "consignor": "",
+          "costPrice": 40,
+          "salePrice": 60,
+          "qty": 1
+        },
+        {
+          "id": "mtqq259ypk0ec",
+          "name": "Cookie",
+          "consignor": "",
+          "costPrice": 70,
+          "salePrice": 70,
+          "qty": 1
+        },
+        {
+          "id": "mtq1xe47x4ww6",
+          "name": "Triple chocolate brownies",
+          "consignor": "",
+          "costPrice": 30,
+          "salePrice": 60,
+          "qty": 1
+        }
+      ],
+      "total": 190,
+      "note": "UPI"
     },
     {
       "id": "mtqx9l4q55gti",
@@ -2510,6 +2774,24 @@
         }
       ],
       "total": 50,
+      "note": "Cash"
+    },
+    {
+      "id": "mtqxmcat2tq7v",
+      "invoiceNo": "#000111-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtq1aqgdvrw7c",
+          "name": "Dark chocolate",
+          "consignor": "",
+          "costPrice": 20,
+          "salePrice": 30,
+          "qty": 1
+        }
+      ],
+      "total": 30,
       "note": "Cash"
     },
     {
