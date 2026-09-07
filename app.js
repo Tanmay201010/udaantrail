@@ -34,10 +34,75 @@ function getNextInvoiceNumber() {
     return maxNum + 1;
 }
 
+function deduplicateJournal(journalList) {
+    if (!Array.isArray(journalList)) return [];
+    const seen = new Map();
+
+    journalList.forEach(j => {
+        if (!j) return;
+        // Check for sales entry vs manual entry
+        const invMatch = (j.desc || '').match(/Invoice\s+(#?\w+)/i) || (j.desc || '').match(/(#\d{4,6})/);
+        let key;
+        if (invMatch) {
+            // Sale entry: strictly 1 journal entry per invoice number
+            const invNo = invMatch[1].toLowerCase().replace(/^#/, '');
+            key = `sale_inv_${invNo}`;
+        } else if (j.id && !String(j.id).startsWith('temp_')) {
+            // Manual entry
+            key = `manual_${j.date || ''}_${(j.desc || '').trim().toLowerCase()}_${j.debitAmt || 0}_${j.creditAmt || 0}_${(j.debitAcc || '').trim().toLowerCase()}_${(j.creditAcc || '').trim().toLowerCase()}`;
+        } else {
+            key = `manual_${j.date || ''}_${(j.desc || '').trim().toLowerCase()}_${j.debitAmt || 0}_${j.creditAmt || 0}_${(j.debitAcc || '').trim().toLowerCase()}_${(j.creditAcc || '').trim().toLowerCase()}`;
+        }
+
+        if (!seen.has(key)) {
+            if (!j.id) j.id = uid();
+            seen.set(key, j);
+        } else {
+            // If duplicate found, keep the existing one or merge
+            const existing = seen.get(key);
+            if (!existing.id && j.id) existing.id = j.id;
+        }
+    });
+
+    return Array.from(seen.values());
+}
+
+function deduplicatePOS(posList) {
+    if (!Array.isArray(posList)) return [];
+    const seen = new Map();
+
+    posList.forEach(b => {
+        if (!b) return;
+        let key;
+        if (b.invoiceNo && b.invoiceNo !== '#000000') {
+            key = `inv_${b.invoiceNo.trim().toLowerCase()}`;
+        } else if (b.id) {
+            key = `id_${b.id}`;
+        } else {
+            key = `bill_${b.date}_${b.total}_${(b.customer || '').trim().toLowerCase()}`;
+        }
+
+        if (!seen.has(key)) {
+            if (!b.id) b.id = uid();
+            seen.set(key, b);
+        }
+    });
+
+    return Array.from(seen.values());
+}
+
 function ensureIds() {
-    if (appData.journal) appData.journal.forEach(e => { if (!e.id) e.id = uid(); });
-    if (appData.pos) appData.pos.forEach(b => { if (!b.id) b.id = uid(); });
-    if (appData.inventory) appData.inventory.forEach(i => { if (!i.id) i.id = uid(); });
+    if (appData.pos) {
+        appData.pos = deduplicatePOS(appData.pos);
+        appData.pos.forEach(b => { if (!b.id) b.id = uid(); });
+    }
+    if (appData.journal) {
+        appData.journal = deduplicateJournal(appData.journal);
+        appData.journal.forEach(e => { if (!e.id) e.id = uid(); });
+    }
+    if (appData.inventory) {
+        appData.inventory.forEach(i => { if (!i.id) i.id = uid(); });
+    }
 }
 
 function saveLocal() {
@@ -54,6 +119,8 @@ function loadLocal() {
     if (!appData.pos) appData.pos = [];
     if (!appData.journal) appData.journal = [];
     if (!appData.nextInvoice) appData.nextInvoice = 1;
+    appData.pos = deduplicatePOS(appData.pos);
+    appData.journal = deduplicateJournal(appData.journal);
     ensureIds();
 }
 
@@ -1879,36 +1946,15 @@ async function fetchFromGitHub(refreshView = true) {
             data = JSON.parse(decoded);
         }
 
-        // Smart merge POS bills (union by unique ID without dropping any sales)
+        // Smart merge POS bills
         const localBills = appData.pos || [];
         const remoteBills = data.pos || [];
-        const billMap = new Map();
-        [...remoteBills, ...localBills].forEach(b => {
-            if (!b.id) b.id = uid();
-            billMap.set(String(b.id), b);
-        });
+        const mergedBills = deduplicatePOS([...remoteBills, ...localBills]);
 
-        const mergedBills = Array.from(billMap.values());
-        const invoiceNoSeen = new Set();
-        mergedBills.forEach(b => {
-            if (!b.invoiceNo) {
-                b.invoiceNo = '#' + String(getNextInvoiceNumber()).padStart(6, '0');
-            }
-            if (invoiceNoSeen.has(b.invoiceNo)) {
-                const termTag = b.terminal ? b.terminal.replace(/\s+/g, '') : 'dup';
-                b.invoiceNo = `${b.invoiceNo}-${termTag}`;
-            }
-            invoiceNoSeen.add(b.invoiceNo);
-        });
-
-        // Smart merge Journal entries by unique ID
+        // Smart merge Journal entries
         const localJournal = appData.journal || [];
         const remoteJournal = data.journal || [];
-        const jMap = new Map();
-        [...remoteJournal, ...localJournal].forEach(j => {
-            if (!j.id) j.id = uid();
-            jMap.set(String(j.id), j);
-        });
+        const mergedJournal = deduplicateJournal([...remoteJournal, ...localJournal]);
 
         // Inventory
         const inventory = data.inventory && data.inventory.length > 0 ? data.inventory : (appData.inventory || []);
@@ -1916,7 +1962,7 @@ async function fetchFromGitHub(refreshView = true) {
         appData = {
             inventory: inventory,
             pos: mergedBills,
-            journal: Array.from(jMap.values()),
+            journal: mergedJournal,
             nextInvoice: Math.max(data.nextInvoice || 1, getNextInvoiceNumber())
         };
         ensureIds();
