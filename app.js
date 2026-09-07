@@ -22,14 +22,31 @@ function uid() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 }
 
+function parseInvoiceNumber(invNo) {
+    if (!invNo) return 0;
+    const match = String(invNo).match(/\d+/);
+    return match ? parseInt(match[0], 10) : 0;
+}
+
+function sortPOSBills(bills, ascending = true) {
+    if (!Array.isArray(bills)) return [];
+    return bills.slice().sort((a, b) => {
+        const numA = parseInvoiceNumber(a.invoiceNo);
+        const numB = parseInvoiceNumber(b.invoiceNo);
+        if (numA !== numB) {
+            return ascending ? (numA - numB) : (numB - numA);
+        }
+        const dateA = a.date || '';
+        const dateB = b.date || '';
+        return ascending ? dateA.localeCompare(dateB) : dateB.localeCompare(dateA);
+    });
+}
+
 function getNextInvoiceNumber() {
     let maxNum = 0;
     (appData.pos || []).forEach(b => {
-        const match = String(b.invoiceNo || '').match(/\d+/);
-        if (match) {
-            const num = parseInt(match[0], 10);
-            if (num > maxNum) maxNum = num;
-        }
+        const num = parseInvoiceNumber(b.invoiceNo);
+        if (num > maxNum) maxNum = num;
     });
     return maxNum + 1;
 }
@@ -93,7 +110,7 @@ function deduplicatePOS(posList) {
 
 function ensureIds() {
     if (appData.pos) {
-        appData.pos = deduplicatePOS(appData.pos);
+        appData.pos = sortPOSBills(deduplicatePOS(appData.pos), true);
         appData.pos.forEach(b => { if (!b.id) b.id = uid(); });
     }
     if (appData.journal) {
@@ -119,7 +136,7 @@ function loadLocal() {
     if (!appData.pos) appData.pos = [];
     if (!appData.journal) appData.journal = [];
     if (!appData.nextInvoice) appData.nextInvoice = 1;
-    appData.pos = deduplicatePOS(appData.pos);
+    appData.pos = sortPOSBills(deduplicatePOS(appData.pos), true);
     appData.journal = deduplicateJournal(appData.journal);
     ensureIds();
 }
@@ -898,7 +915,7 @@ function generateAndPrintBill(bill) {
 // BILL HISTORY
 // =============================================
 function initBillHistory() {
-    let filtered = [...appData.pos].reverse(); // newest first
+    let filtered = sortPOSBills(appData.pos, false); // strictly sorted newest (highest invoice number) first
     let editModalItems = [];
 
     function render(list) {
@@ -1248,7 +1265,7 @@ function initBillHistory() {
             }
         }
 
-        render(results);
+        render(sortPOSBills(results, false));
     }
 
     // Initial render
@@ -1270,7 +1287,7 @@ function initBillHistory() {
         exportBtn.addEventListener('click', () => {
             if (appData.pos.length === 0) { alert('No bills to export.'); return; }
             const header = 'Invoice No,Date,Customer,Items,Payment,Total\n';
-            const rows = [...appData.pos].reverse().map(b => {
+            const rows = sortPOSBills(appData.pos, false).map(b => {
                 const items = (b.items || []).map(i => `${i.name}x${i.qty}`).join(' | ');
                 return [b.invoiceNo, b.date, b.customer, `"${items}"`, b.note, b.total].join(',');
             }).join('\n');
