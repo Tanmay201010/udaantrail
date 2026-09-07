@@ -4497,27 +4497,6 @@
       ],
       "total": 150,
       "note": "UPI"
-    },
-    {
-      "id": "mtrjx3y7snn7t",
-      "invoiceNo": "#000192",
-      "date": "2026-09-07",
-      "time": "11:35 PM",
-      "createdAt": "2026-09-07T18:05:42.076Z",
-      "customer": "Walk-in Customer",
-      "items": [
-        {
-          "id": "mtrjv9kcbvqoh",
-          "name": "hulullu chocolate",
-          "consignor": "",
-          "costPrice": 9999,
-          "salePrice": 9999,
-          "qty": 1
-        }
-      ],
-      "total": 9999,
-      "note": "UPI",
-      "terminal": "Counter 2"
     }
   ],
   "journal": [
@@ -6158,17 +6137,6 @@
       "date": "2026-09-07",
       "desc": "Sale - Invoice #000181 to Walk-in Customer",
       "debitAmt": 150
-    },
-    {
-      "id": "j_mtrjx3y7snn7t",
-      "date": "2026-09-07",
-      "time": "11:35 PM",
-      "createdAt": "2026-09-07T18:05:42.076Z",
-      "desc": "Sale - Invoice #000192 to Walk-in Customer [UPI] (Counter 2)",
-      "debitAcc": "Bank",
-      "debitAmt": 9999,
-      "creditAcc": "Sales",
-      "creditAmt": 9999
     }
   ],
   "nextInvoice": 193
