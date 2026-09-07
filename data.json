@@ -2012,6 +2012,32 @@
     },
     {
       "id": "mtqw4kz4215gv",
+      "invoiceNo": "#000088-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtqszf7mn99lk",
+          "name": "Silicon bracelet",
+          "consignor": "",
+          "costPrice": 150,
+          "salePrice": 150,
+          "qty": 4
+        },
+        {
+          "id": "mtq1xww8d0w3z",
+          "name": "Nutella brownie",
+          "consignor": "",
+          "costPrice": 30,
+          "salePrice": 1,
+          "qty": 1
+        }
+      ],
+      "total": 601,
+      "note": "UPI"
+    },
+    {
+      "id": "mtqw4kz4215gv",
       "invoiceNo": "#000089",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
@@ -2063,6 +2089,32 @@
       "note": "UPI"
     },
     {
+      "id": "mtqwgnx4rwk4a",
+      "invoiceNo": "#000090-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtqq259ypk0ec",
+          "name": "Cookie",
+          "consignor": "",
+          "costPrice": 70,
+          "salePrice": 70,
+          "qty": 1
+        },
+        {
+          "id": "mtq1aqgdvrw7c",
+          "name": "Dark chocolate",
+          "consignor": "",
+          "costPrice": 20,
+          "salePrice": 30,
+          "qty": 1
+        }
+      ],
+      "total": 100,
+      "note": "Cash"
+    },
+    {
       "id": "mtqwa82xzbl7d",
       "invoiceNo": "#000091",
       "date": "2026-09-07",
@@ -2078,6 +2130,24 @@
         }
       ],
       "total": 60,
+      "note": "Cash"
+    },
+    {
+      "id": "mtqwiiduhu8xd",
+      "invoiceNo": "#000091-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtqq259ypk0ec",
+          "name": "Cookie",
+          "consignor": "",
+          "costPrice": 70,
+          "salePrice": 70,
+          "qty": 1
+        }
+      ],
+      "total": 70,
       "note": "Cash"
     },
     {
@@ -2125,6 +2195,24 @@
       "note": "UPI"
     },
     {
+      "id": "mtqwpddym9jjl",
+      "invoiceNo": "#000093-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtq1yl0l0n2me",
+          "name": "Millionaire brownie",
+          "consignor": "",
+          "costPrice": 32,
+          "salePrice": 50,
+          "qty": 2
+        }
+      ],
+      "total": 100,
+      "note": "Cash"
+    },
+    {
       "id": "mtqwiiduhu8xd",
       "invoiceNo": "#000094",
       "date": "2026-09-07",
@@ -2169,6 +2257,32 @@
       "note": "Cash"
     },
     {
+      "id": "mtqwu0xzaet7j",
+      "invoiceNo": "#000095-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtq15fqr6t6s7",
+          "name": "Gym keychain",
+          "consignor": "",
+          "costPrice": 250,
+          "salePrice": 250,
+          "qty": 1
+        },
+        {
+          "id": "mtq1xww8d0w3z",
+          "name": "Nutella brownie",
+          "consignor": "",
+          "costPrice": 30,
+          "salePrice": 60,
+          "qty": 1
+        }
+      ],
+      "total": 310,
+      "note": "UPI"
+    },
+    {
       "id": "mtqw6qcj0tpob",
       "invoiceNo": "#000096",
       "date": "2026-09-07",
@@ -2185,6 +2299,32 @@
       ],
       "total": 59,
       "note": "UPI"
+    },
+    {
+      "id": "mtqwzcvoj60n9",
+      "invoiceNo": "#000096-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtq1xe47x4ww6",
+          "name": "Triple chocolate brownies",
+          "consignor": "",
+          "costPrice": 30,
+          "salePrice": 60,
+          "qty": 2
+        },
+        {
+          "id": "mtq1a4u9oz9g4",
+          "name": "Milk Chocolates",
+          "consignor": "",
+          "costPrice": 20,
+          "salePrice": 30,
+          "qty": 1
+        }
+      ],
+      "total": 150,
+      "note": "Cash"
     },
     {
       "id": "mtqwpddym9jjl",
@@ -2267,6 +2407,24 @@
       "note": "UPI"
     },
     {
+      "id": "mtqx7hd45nsqk",
+      "invoiceNo": "#000100-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtq1yl0l0n2me",
+          "name": "Millionaire brownie",
+          "consignor": "",
+          "costPrice": 32,
+          "salePrice": 50,
+          "qty": 2
+        }
+      ],
+      "total": 100,
+      "note": "Cash"
+    },
+    {
       "id": "mtqwfodpwwydu",
       "invoiceNo": "#000101",
       "date": "2026-09-07",
@@ -2282,6 +2440,24 @@
         }
       ],
       "total": 200,
+      "note": "Cash"
+    },
+    {
+      "id": "mtqx7o9klevkj",
+      "invoiceNo": "#000101-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtq1yl0l0n2me",
+          "name": "Millionaire brownie",
+          "consignor": "",
+          "costPrice": 32,
+          "salePrice": 50,
+          "qty": 1
+        }
+      ],
+      "total": 50,
       "note": "Cash"
     },
     {
@@ -2347,6 +2523,24 @@
       "note": "Cash"
     },
     {
+      "id": "mtqxbldn06cvf",
+      "invoiceNo": "#000104-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtqq259ypk0ec",
+          "name": "Cookie",
+          "consignor": "",
+          "costPrice": 70,
+          "salePrice": 70,
+          "qty": 1
+        }
+      ],
+      "total": 70,
+      "note": "Cash"
+    },
+    {
       "id": "mtqw7qdwb5o72",
       "invoiceNo": "#000105",
       "date": "2026-09-07",
@@ -2407,6 +2601,24 @@
       "note": "UPI"
     },
     {
+      "id": "mtqxdi6om6hhy",
+      "invoiceNo": "#000106-dup",
+      "date": "2026-09-07",
+      "customer": "sanajana",
+      "items": [
+        {
+          "id": "mtqq259ypk0ec",
+          "name": "Cookie",
+          "consignor": "",
+          "costPrice": 70,
+          "salePrice": 70,
+          "qty": 1
+        }
+      ],
+      "total": 70,
+      "note": "Cash"
+    },
+    {
       "id": "mtqx7hd45nsqk",
       "invoiceNo": "#000107",
       "date": "2026-09-07",
@@ -2443,6 +2655,24 @@
       "note": "Cash"
     },
     {
+      "id": "mtqxhfl3hfedt",
+      "invoiceNo": "#000108-dup",
+      "date": "2026-09-07",
+      "customer": "Tanmay",
+      "items": [
+        {
+          "id": "mtq1xe47x4ww6",
+          "name": "Triple chocolate brownies",
+          "consignor": "",
+          "costPrice": 30,
+          "salePrice": 60,
+          "qty": 1
+        }
+      ],
+      "total": 60,
+      "note": "Cash"
+    },
+    {
       "id": "mtqx7o9klevkj",
       "invoiceNo": "#000109",
       "date": "2026-09-07",
@@ -2459,6 +2689,40 @@
       ],
       "total": 50,
       "note": "Cash"
+    },
+    {
+      "id": "mtqxl2m8bofvy",
+      "invoiceNo": "#000109-dup",
+      "date": "2026-09-07",
+      "customer": "tanmay",
+      "items": [
+        {
+          "id": "mtq196aapwie0",
+          "name": "Dipped cookies Milk chocolate",
+          "consignor": "",
+          "costPrice": 40,
+          "salePrice": 60,
+          "qty": 1
+        },
+        {
+          "id": "mtqq259ypk0ec",
+          "name": "Cookie",
+          "consignor": "",
+          "costPrice": 70,
+          "salePrice": 70,
+          "qty": 1
+        },
+        {
+          "id": "mtq1xe47x4ww6",
+          "name": "Triple chocolate brownies",
+          "consignor": "",
+          "costPrice": 30,
+          "salePrice": 60,
+          "qty": 1
+        }
+      ],
+      "total": 190,
+      "note": "UPI"
     },
     {
       "id": "mtqwzcvoj60n9",
@@ -2511,6 +2775,24 @@
       ],
       "total": 90,
       "note": "UPI"
+    },
+    {
+      "id": "mtqxmcat2tq7v",
+      "invoiceNo": "#000111-dup",
+      "date": "2026-09-07",
+      "customer": "Walk-in Customer",
+      "items": [
+        {
+          "id": "mtq1aqgdvrw7c",
+          "name": "Dark chocolate",
+          "consignor": "",
+          "costPrice": 20,
+          "salePrice": 30,
+          "qty": 1
+        }
+      ],
+      "total": 30,
+      "note": "Cash"
     },
     {
       "id": "mtqx393z28jgc",
@@ -4497,27 +4779,6 @@
       ],
       "total": 150,
       "note": "UPI"
-    },
-    {
-      "id": "mtrjx3y7snn7t",
-      "invoiceNo": "#000205",
-      "date": "2026-09-07",
-      "time": "11:35 PM",
-      "createdAt": "2026-09-07T18:05:42.076Z",
-      "customer": "Walk-in Customer",
-      "items": [
-        {
-          "id": "mtrjv9kcbvqoh",
-          "name": "hulullu chocolate",
-          "consignor": "",
-          "costPrice": 9999,
-          "salePrice": 9999,
-          "qty": 1
-        }
-      ],
-      "total": 9999,
-      "note": "UPI",
-      "terminal": "Counter 2"
     }
   ],
   "journal": [
@@ -4538,15 +4799,6 @@
       "debitAmt": 200,
       "creditAcc": "Cash",
       "creditAmt": 200
-    },
-    {
-      "id": "j_mtqwgnx4rwk4a",
-      "creditAcc": "Sales",
-      "creditAmt": 9999,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000205 to Walk-in Customer [UPI] (Counter 2)",
-      "debitAmt": 9999
     },
     {
       "id": "j_mtqxb6ynm1ctu",
@@ -4655,17 +4907,6 @@
       "date": "2026-09-07",
       "desc": "Sale - Invoice #000193 to Suhas (credit) [Cash]",
       "debitAmt": 50
-    },
-    {
-      "id": "j_mtrjx3y7snn7t",
-      "date": "2026-09-07",
-      "time": "11:35 PM",
-      "createdAt": "2026-09-07T18:05:42.076Z",
-      "desc": "Sale - Invoice #000192 to Walk-in Customer [UPI] (Counter 2)",
-      "debitAcc": "Bank",
-      "debitAmt": 9999,
-      "creditAcc": "Sales",
-      "creditAmt": 9999
     },
     {
       "id": "j_mtqxbldn06cvf",
