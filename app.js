@@ -253,6 +253,21 @@ function startApp() {
         updateSyncStatus('Not configured', 'warning');
     }
 
+    // Periodic auto-sync every 20 seconds for multi-phone realtime updates
+    if (window._syncInterval) clearInterval(window._syncInterval);
+    window._syncInterval = setInterval(() => {
+        if (settings.pat && settings.owner && settings.repo) {
+            fetchFromGitHub(false);
+        }
+    }, 20000);
+
+    // Auto-sync on window/tab focus
+    window.addEventListener('focus', () => {
+        if (settings.pat && settings.owner && settings.repo) {
+            fetchFromGitHub(false);
+        }
+    });
+
     // Route to default
     const hash = location.hash.replace('#', '') || 'dashboard';
     navigateTo(hash);
@@ -278,6 +293,11 @@ function navigateTo(target, pushState = true) {
     lucide.createIcons();
 
     document.getElementById('page-title').textContent = pageTitles[target] || target;
+
+    // Auto-refresh data when navigating to POS or Bill History
+    if ((target === 'bill-history' || target === 'pos') && settings.pat && settings.owner && settings.repo) {
+        fetchFromGitHub(false);
+    }
 
     document.querySelectorAll('.nav-item').forEach(l => {
         l.classList.toggle('active', l.getAttribute('data-target') === target);
@@ -1281,6 +1301,12 @@ function initBillHistory() {
         searchInput.addEventListener('input', applyBillFilters);
     }
 
+    // Fix & Resequence All Invoices
+    const reseqBtn = document.getElementById('resequence-bills-btn');
+    if (reseqBtn) {
+        reseqBtn.addEventListener('click', resequenceAllInvoices);
+    }
+
     // Export CSV
     const exportBtn = document.getElementById('export-bills-btn');
     if (exportBtn) {
@@ -1313,6 +1339,68 @@ function initBillHistory() {
             }
         });
     }
+}
+
+async function resequenceAllInvoices() {
+    if (!appData.pos || appData.pos.length === 0) {
+        alert('No invoices to resequence.');
+        return;
+    }
+
+    if (!confirm(`This will sort all ${appData.pos.length} invoices chronologically and assign clean sequential numbers from #000001 to #${String(appData.pos.length).padStart(6, '0')}. This will synchronize across all phones. Proceed?`)) {
+        return;
+    }
+
+    updateSyncStatus('Resequencing...', 'warning');
+
+    // 1. If GitHub configured, pre-sync latest to get everything from both phones
+    if (settings.pat && settings.owner && settings.repo) {
+        try {
+            await fetchFromGitHub(false);
+        } catch(e) {}
+    }
+
+    // 2. Sort all bills chronologically and by original order
+    const sortedBills = appData.pos.slice().sort((a, b) => {
+        const numA = parseInvoiceNumber(a.invoiceNo);
+        const numB = parseInvoiceNumber(b.invoiceNo);
+        if (numA !== numB) return numA - numB;
+        const dateA = a.date || '';
+        const dateB = b.date || '';
+        return dateA.localeCompare(dateB);
+    });
+
+    // 3. Renumber all bills cleanly from 1 to N
+    sortedBills.forEach((b, index) => {
+        const oldInvNo = b.invoiceNo;
+        const newInvNo = '#' + String(index + 1).padStart(6, '0');
+        b.invoiceNo = newInvNo;
+
+        // Reconcile matching journal entry description
+        const jEntry = appData.journal.find(j => 
+            (j.id && String(j.id) === "j_" + String(b.id)) ||
+            ((j.desc || '').includes(oldInvNo))
+        );
+        if (jEntry) {
+            const customer = b.customer || 'Walk-in Customer';
+            const note = b.note || 'Cash';
+            const termTag = b.terminal ? ` (${b.terminal})` : '';
+            jEntry.desc = `Sale - Invoice ${newInvNo} to ${customer} [${note}]${termTag}`;
+            jEntry.date = b.date;
+            jEntry.debitAmt = b.total;
+            jEntry.creditAmt = b.total;
+        }
+    });
+
+    appData.pos = sortedBills;
+    appData.nextInvoice = sortedBills.length + 1;
+    appData.journal = deduplicateJournal(appData.journal);
+
+    saveLocal();
+    await syncData();
+
+    initBillHistory();
+    alert(`✓ Successfully resequenced all ${sortedBills.length} invoices (#000001 to #${String(sortedBills.length).padStart(6, '0')}) and synchronized!`);
 }
 
 // =============================================
