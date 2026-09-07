@@ -1143,28 +1143,35 @@ function initBillHistory() {
                 let totalFilteredRevenue = 0;
 
                 results.forEach(b => {
-                    totalFilteredRevenue += (parseFloat(b.total) || 0);
                     (b.items || []).forEach(i => {
+                        const itemQty = parseInt(i.qty, 10) || 0;
+                        const itemRev = (parseFloat(i.salePrice) || 0) * itemQty;
+
                         if (selectedProduct) {
+                            // Calculate units and revenue ONLY for the selected product
                             if ((i.name || '').trim().toLowerCase() === selectedProduct.toLowerCase()) {
-                                totalUnits += (parseInt(i.qty, 10) || 0);
+                                totalUnits += itemQty;
+                                totalFilteredRevenue += itemRev;
                             }
                         } else if (q) {
-                            if ((i.name || '').toLowerCase().includes(q) || (i.consignor || '').toLowerCase().includes(q)) {
-                                totalUnits += (parseInt(i.qty, 10) || 0);
-                            } else {
-                                totalUnits += (parseInt(i.qty, 10) || 0);
+                            const isItemMatch = (i.name || '').toLowerCase().includes(q) || (i.consignor || '').toLowerCase().includes(q);
+                            const isInvoiceMatch = (b.customer || '').toLowerCase().includes(q) || (b.invoiceNo || '').toLowerCase().includes(q) || (b.date || '').includes(q);
+                            
+                            if (isItemMatch) {
+                                totalUnits += itemQty;
+                                totalFilteredRevenue += itemRev;
+                            } else if (isInvoiceMatch) {
+                                totalUnits += itemQty;
+                                totalFilteredRevenue += itemRev;
                             }
-                        } else {
-                            totalUnits += (parseInt(i.qty, 10) || 0);
                         }
                     });
                 });
 
-                const productLabel = selectedProduct ? `<strong>${selectedProduct}</strong>` : (q ? `"${q}"` : 'filter');
+                const productLabel = selectedProduct ? `<strong>${selectedProduct}</strong>` : `"${q}"`;
                 summaryEl.innerHTML = `
                     <span>🔍 Found <strong>${results.length}</strong> matching invoice${results.length === 1 ? '' : 's'} for ${productLabel}</span>
-                    <span style="display:inline-flex;gap:1rem;font-weight:600;">
+                    <span style="display:inline-flex;gap:1.5rem;font-weight:600;">
                         <span>Units Sold: <span style="color:var(--primary);">${totalUnits}</span></span>
                         <span>Total Revenue: <span style="color:var(--primary);">${fmt(totalFilteredRevenue)}</span></span>
                     </span>
