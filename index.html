@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0f172a">
+  <title>UdaanPro - Accounting Web App</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Login Screen Overlay -->
+  <div id="login-overlay" class="login-overlay">
+    <div class="card login-card">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <i data-lucide="wallet" style="width: 48px; height: 48px; color: var(--accent); margin-bottom: 1rem;"></i>
+            <h2>UdaanPro Login</h2>
+            <p class="text-muted">Enter your team credentials</p>
+        </div>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="login-user" placeholder="admin">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="login-pass" placeholder="sales or finance">
+        </div>
+        <button id="login-btn" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Login</button>
+        <p id="login-error" style="color: var(--danger); text-align: center; margin-top: 1rem; display: none;">Invalid credentials.</p>
+    </div>
+  </div>
+
+  <div id="app" class="app-container" style="display: none;">
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <nav class="sidebar">
+      <div class="logo">
+         <i data-lucide="wallet"></i>
+         <h2>UdaanPro</h2>
+      </div>
+      <div style="margin-bottom: 1.5rem; padding: 0.5rem; background: var(--bg-tertiary); border-radius: 4px; font-size: 0.8rem; text-align: center; color: var(--text-secondary);">
+         Logged in as: <strong id="logged-in-role" style="color: var(--accent);"></strong>
+         <br>
+         <a href="#" id="logout-btn" style="display: inline-block; margin-top: 0.5rem; font-size: 0.8rem; text-decoration: underline;">Logout</a>
+      </div>
+      <ul class="nav-links">
+        <li data-role="all"><a href="#dashboard" class="nav-item active" data-target="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+        
+        <!-- Sales Team Links -->
+        <li data-role="sales"><a href="#inventory" class="nav-item" data-target="inventory"><i data-lucide="package"></i> Inventory</a></li>
+        <li data-role="sales"><a href="#pos" class="nav-item" data-target="pos"><i data-lucide="monitor-speaker"></i> Billing / POS</a></li>
+        <li data-role="sales"><a href="#bill-history" class="nav-item" data-target="bill-history"><i data-lucide="receipt"></i> Bill History</a></li>
+        
+        <!-- Finance Team Links -->
+        <li data-role="finance"><a href="#cash-book" class="nav-item" data-target="cash-book"><i data-lucide="coins"></i> Cash Book</a></li>
+        <li data-role="finance"><a href="#journal" class="nav-item" data-target="journal"><i data-lucide="book-marked"></i> Journal</a></li>
+        <li data-role="finance"><a href="#ledger" class="nav-item" data-target="ledger"><i data-lucide="book"></i> Ledger</a></li>
+        <li data-role="finance"><a href="#trial-balance" class="nav-item" data-target="trial-balance"><i data-lucide="scale"></i> Trial Balance</a></li>
+        <li data-role="finance"><a href="#financial-statements" class="nav-item" data-target="financial-statements"><i data-lucide="pie-chart"></i> Statements</a></li>
+        
+        <li data-role="all"><a href="#settings" class="nav-item" data-target="settings"><i data-lucide="settings"></i> Settings</a></li>
+      </ul>
+      <div class="sidebar-footer">
+         <button id="force-sync-btn" class="btn btn-secondary btn-sm" style="width: 100%; display: flex; gap: 0.5rem; justify-content: center; align-items: center;">
+            <i data-lucide="refresh-cw"></i> Sync Data
+         </button>
+      </div>
+    </nav>
+    <main class="main-content">
+      <header class="topbar">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <button id="mobile-menu-btn" class="mobile-menu-btn" style="background: transparent; border: none; color: var(--text-primary); cursor: pointer; display: none;">
+                <i data-lucide="menu"></i>
+            </button>
+            <h1 id="page-title">Dashboard</h1>
+        </div>
+        <div class="sync-status" id="sync-status">
+            <span class="status-indicator"></span>
+            <span id="sync-status-text">Not configured</span>
+        </div>
+      </header>
+      <div id="view-container" class="view-container">
+        <!-- Content gets injected here -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Templates -->
+  <template id="tpl-dashboard">
+    <div class="dashboard-grid">
+      <div class="card stat-card">
+        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.2); color: var(--success);"><i data-lucide="trending-up"></i></div>
+        <div class="stat-info">
+           <h3>Total Cash Balance</h3>
+           <p id="dash-cash-balance">₹ 0.00</p>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon" style="background: rgba(59, 130, 246, 0.2); color: var(--accent);"><i data-lucide="file-check-2"></i></div>
+        <div class="stat-info">
+           <h3>Total Bills Generated</h3>
+           <p id="dash-bills-count">0</p>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon" style="background: rgba(239, 68, 68, 0.2); color: var(--danger);"><i data-lucide="arrow-down-right"></i></div>
+        <div class="stat-info">
+           <h3>Total Expenses</h3>
+           <p id="dash-expenses">₹ 0.00</p>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon" style="background: rgba(168, 85, 247, 0.2); color: #a855f7;"><i data-lucide="book-open-check"></i></div>
+        <div class="stat-info">
+           <h3>Total Journal Entries</h3>
+           <p id="dash-journal-count">0</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="recent-section">
+      <div class="card">
+        <h2>Recent Transactions</h2>
+        <div class="table-container">
+          <table id="dash-recent-table" class="data-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Account</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-settings">
+    <div class="card settings-card">
+      <h2>GitHub Repository Configuration</h2>
+      <p class="text-muted" style="margin-bottom: 1.5rem;">Configure your GitHub Personal Access Token to sync your data to your repository. This ensures your data is safe and versioned.</p>
+      
+      <div class="form-group">
+        <label>GitHub Personal Access Token (PAT) <span class="required">*</span></label>
+        <input type="password" id="gh-pat" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+        <small>Needs 'repo' scope.</small>
+      </div>
+      
+      <div class="form-group">
+        <label>Repository Owner (Username)</label>
+        <input type="text" id="gh-owner" placeholder="Tanmay201010">
+      </div>
+      
+      <div class="form-group">
+        <label>Repository Name</label>
+        <input type="text" id="gh-repo" placeholder="udaan">
+      </div>
+
+      <div class="form-group">
+        <label>File Path</label>
+        <input type="text" id="gh-path" placeholder="e.g., data.json" value="data.json">
+      </div>
+      
+      <div class="actions" style="margin-top: 2rem;">
+         <button id="save-settings-btn" class="btn btn-primary">Save Configuration & Test</button>
+      </div>
+
+      <div id="settings-msg" style="margin-top: 1rem;"></div>
+
+      <hr style="border: 0; border-top: 1px solid var(--border); margin: 2rem 0;">
+      <h2>Data Backup & Restore</h2>
+      <p class="text-muted" style="margin-bottom: 1rem;">Export your full database as JSON or import/restore a recovered data file.</p>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button id="backup-download-btn" class="btn btn-secondary"><i data-lucide="download"></i> Download Full Backup</button>
+        <button id="backup-import-btn" class="btn btn-secondary"><i data-lucide="upload"></i> Restore / Import JSON</button>
+        <input type="file" id="backup-file-input" accept=".json" style="display: none;">
+      </div>
+      <div id="backup-msg" style="margin-top: 1rem;"></div>
+    </div>
+  </template>
+
+  <template id="tpl-inventory">
+      <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2>Inventory Management</h2>
+            <button id="new-item-btn" class="btn btn-primary"><i data-lucide="plus"></i> Add Product</button>
+          </div>
+          <div class="table-container">
+              <table class="data-table" id="inventory-table">
+                  <thead>
+                       <tr>
+                           <th>Product Name</th>
+                           <th>Consignor</th>
+                           <th>Quantity</th>
+                           <th>Price (₹)</th>
+                           <th>Actions</th>
+                       </tr>
+                  </thead>
+                  <tbody></tbody>
+              </table>
+          </div>
+      </div>
+      <!-- Add Item Modal -->
+      <div id="inventory-modal" class="modal" style="display: none;">
+          <div class="modal-content card" style="max-width: 400px; margin: 10% auto;">
+              <h3 id="inv-modal-title">Add New Product</h3>
+              <input type="hidden" id="inv-edit-id" value="">
+              <div class="form-group" style="margin-top: 1rem;">
+                  <label>Product Name</label>
+                  <input type="text" id="inv-name" placeholder="e.g., Premium Widget">
+              </div>
+              <div class="form-group">
+                  <label>Consignor Name</label>
+                  <input type="text" id="inv-consignor" placeholder="e.g., Ravi Traders">
+              </div>
+              <div class="form-group">
+                  <label>Quantity</label>
+                  <input type="number" id="inv-qty" min="1" step="1" value="1">
+              </div>
+              <div class="form-group">
+                  <label>Selling Price (₹) — Inventory/Cost Price</label>
+                  <input type="number" id="inv-price" min="0" step="1" placeholder="e.g., 500">
+              </div>
+              <div class="actions" style="margin-top: 1.5rem; justify-content: flex-end; display: flex; gap: 1rem;">
+                  <button id="inv-cancel-btn" class="btn btn-secondary">Cancel</button>
+                  <button id="inv-save-btn" class="btn btn-primary">Save Product</button>
+              </div>
+          </div>
+      </div>
+  </template>
+
+  <template id="tpl-pos">
+    <div class="bill-book-layout">
+        <div class="card form-panel">
+            <h2>Billing Counter (POS)</h2>
+            <div class="split-layout">
+                <div class="form-group">
+                    <label>Invoice No</label>
+                    <input type="text" id="pos-no" placeholder="#000001" readonly style="background-color: var(--bg-tertiary); cursor: not-allowed;">
+                </div>
+                <div class="form-group">
+                    <label>Issue Date</label>
+                    <input type="date" id="pos-date" readonly style="background-color: var(--bg-tertiary); cursor: not-allowed;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Issued To</label>
+                <input type="text" id="pos-customer" placeholder="Customer Name" autocomplete="off">
+            </div>
+            
+            <h3 style="margin-top: 1rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">Add Items</h3>
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; align-items: flex-end; flex-wrap: wrap;">
+                <div class="form-group" style="flex: 2; min-width: 160px; margin-bottom: 0;">
+                    <label>Select Product (Search or Pick)</label>
+                    <input type="text" id="pos-product-input" list="pos-product-datalist" placeholder="Click or type to search item..." class="custom-select" autocomplete="off" style="width: 100%;">
+                    <datalist id="pos-product-datalist"></datalist>
+                </div>
+                <div class="form-group" style="flex: 0.8; min-width: 70px; margin-bottom: 0;">
+                    <label>Qty</label>
+                    <input type="number" id="pos-qty" min="1" step="1" value="1" autocomplete="off" style="padding: 0.5rem; width: 100%;">
+                </div>
+                <div class="form-group" style="flex: 1; min-width: 90px; margin-bottom: 0;">
+                    <label>Sale Price (₹)</label>
+                    <input type="number" id="pos-sale-price" placeholder="e.g. 600" autocomplete="off" style="padding: 0.5rem; width: 100%;">
+                </div>
+                <button id="pos-add-item-btn" class="btn btn-secondary" style="height: 44px;"><i data-lucide="plus"></i> Add</button>
+            </div>
+
+            <div id="pos-items-container">
+                <!-- Selected Items List -->
+            </div>
+            
+            <div class="form-group" style="margin-top: 1.5rem;">
+                <label>Payment Method</label>
+                <select id="pos-note" class="custom-select">
+                    <option value="Cash">Cash</option>
+                    <option value="UPI">UPI</option>
+                </select>
+            </div>
+
+            <div class="actions" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                <button id="generate-bill-btn" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 0.75rem;">Generate & Export Bill</button>
+                <button id="save-history-btn" class="btn btn-secondary" style="width: 100%; padding: 0.75rem;">Save to History Only</button>
+            </div>
+        </div>
+        
+        <div class="preview-panel" style="position: absolute; left: -9999px; top: -9999px;">
+            <div class="card bill-preview" id="bill-preview-card">
+                <div class="bill-header">
+                    <div class="logos">
+                        <div class="logo-box placeholder-logo" style="width: 100px; height: 100px; background: #333; color: white; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; border-radius: 4px;">(Logo) DAAN</div>
+                        <div class="logo-box placeholder-logo" style="width: 250px; height: 60px; background: #444; color: white; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; border-radius: 4px; margin-left: 1rem;">DELHI PUBLIC SCHOOL NACHARAM</div>
+                    </div>
+                    <div class="bill-meta" style="text-align: right;">
+                        <p><strong>Date Issued:</strong> <br><span id="prev-date">10 January 2024</span></p>
+                    </div>
+                </div>
+                
+                <div class="bill-title-area" style="display: flex; justify-content: space-between; align-items: center; margin: 2rem 0;">
+                    <div>
+                        <p><strong>Invoice No:</strong></p>
+                        <p id="prev-invoice-no">#000001</p>
+                    </div>
+                    <h1 class="invoice-title" style="letter-spacing: 0.5em; font-size: 2.5rem; font-weight: 300;">IN VO IC E</h1>
+                    <div style="text-align: right;">
+                        <p><strong>Issued to:</strong></p>
+                        <p id="prev-customer">Claudia Alves</p>
+                    </div>
+                </div>
+
+                <table class="bill-table" id="prev-items-table" style="width: 100%; border-collapse: collapse; margin-bottom: 2rem;">
+                    <thead>
+                        <tr style="background: #f1f5f9; border-top: 1px solid #cbd5e1; border-bottom: 1px solid #cbd5e1;">
+                            <th style="padding: 1rem; text-align: left;">NO</th>
+                            <th style="padding: 1rem; text-align: left;">DESCRIPTION</th>
+                            <th style="padding: 1rem; text-align: right;">QTY</th>
+                            <th style="padding: 1rem; text-align: right;">PRICE</th>
+                            <th style="padding: 1rem; text-align: right;">SUBTOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Items -->
+                    </tbody>
+                </table>
+                
+                <div class="bill-footer" style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #cbd5e1; padding-top: 1rem;">
+                    <div class="bill-note">
+                        <p><strong>Note:</strong></p>
+                        <p id="prev-note">Cash / UPI</p>
+                    </div>
+                    <div class="bill-total" style="text-align: right;">
+                        <span style="font-weight: bold; margin-right: 2rem;">GRAND TOTAL</span>
+                        <span id="prev-grand-total" style="font-weight: bold; font-size: 1.2rem;">₹ 0.00</span>
+                    </div>
+                </div>
+                <div style="border-bottom: 1px solid #cbd5e1; margin-top: 1rem;"></div>
+            </div>
+        </div>
+    </div>
+  </template>
+
+  <!-- Bill History Template -->
+  <template id="tpl-bill-history">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+        <h2>Bill History</h2>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+          <input type="text" id="bill-search" placeholder="🔍 Search product, customer, invoice…" autocomplete="off" style="padding:0.5rem 0.75rem; background:var(--bg-primary); border:1px solid var(--border); border-radius:var(--radius-md); color:var(--text-primary); font-family:inherit; font-size:14px; min-width:220px;">
+          <select id="bill-product-filter" class="custom-select" style="padding:0.5rem; font-size:14px; min-width:180px;">
+            <option value="">All Products</option>
+          </select>
+          <button id="import-bills-btn" class="btn btn-secondary"><i data-lucide="upload"></i> Import JSON</button>
+          <input type="file" id="import-bills-input" accept=".json" style="display: none;">
+          <button id="export-bills-btn" class="btn btn-secondary"><i data-lucide="download"></i> Export CSV</button>
+        </div>
+      </div>
+      <div id="bill-filter-summary" style="display:none; margin-bottom:0.75rem; font-size:0.875rem; color:var(--text-primary); background:rgba(59,130,246,0.12); padding:0.5rem 0.85rem; border-radius:var(--radius-md); border:1px solid rgba(59,130,246,0.25); justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;"></div>
+      <div class="table-container">
+        <table class="data-table" id="bill-history-table">
+          <thead>
+            <tr>
+              <th>Invoice No</th>
+              <th>Date</th>
+              <th>Customer</th>
+              <th>Items</th>
+              <th>Payment</th>
+              <th style="text-align:right;">Total</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p id="bill-history-empty" style="text-align:center; color:var(--text-secondary); padding:2rem; display:none;">No bills found.</p>
+
+      <!-- Edit Bill Modal -->
+      <div id="edit-bill-modal" class="modal" style="display: none;">
+          <div class="modal-content card" style="max-width: 520px; margin: 4% auto;">
+              <h3 id="edit-bill-title">Edit Invoice</h3>
+              <input type="hidden" id="edit-bill-id" value="">
+              
+              <div class="split-layout" style="margin-top: 1rem;">
+                  <div class="form-group">
+                      <label>Invoice No</label>
+                      <input type="text" id="edit-bill-no" readonly style="background-color: var(--bg-tertiary); cursor: not-allowed;">
+                  </div>
+                  <div class="form-group">
+                      <label>Date</label>
+                      <input type="date" id="edit-bill-date">
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label>Customer Name</label>
+                  <input type="text" id="edit-bill-customer" placeholder="Customer Name" autocomplete="off">
+              </div>
+
+              <div class="form-group">
+                  <label>Payment Method</label>
+                  <select id="edit-bill-payment" class="custom-select">
+                      <option value="Cash">Cash</option>
+                      <option value="UPI">UPI</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label>Bill Items (Edit Qty or Price)</label>
+                  <div id="edit-bill-items-list" style="max-height: 220px; overflow-y: auto; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.5rem; background: var(--bg-primary);">
+                      <!-- Dynamically rendered editable items -->
+                  </div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding: 0.75rem; background: var(--bg-tertiary); border-radius: var(--radius-md);">
+                  <span style="font-weight: 600;">Updated Total:</span>
+                  <span id="edit-bill-total-display" style="color: var(--accent); font-size: 1.25rem; font-weight: bold;">₹ 0.00</span>
+              </div>
+
+              <div class="actions" style="margin-top: 1.5rem; justify-content: flex-end; display: flex; gap: 1rem;">
+                  <button id="edit-bill-cancel-btn" class="btn btn-secondary">Cancel</button>
+                  <button id="edit-bill-save-btn" class="btn btn-primary">Save Invoice</button>
+              </div>
+          </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- More templates to be added as we go (Journal, Cash book, Ledger etc.) -->
+  <template id="tpl-journal">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+            <h2>Journal Entries</h2>
+            <div style="display: flex; gap: 0.5rem;">
+                <button id="export-journal-btn" class="btn btn-secondary"><i data-lucide="download"></i> Export Excel</button>
+                <button id="new-journal-btn" class="btn btn-primary"><i data-lucide="plus"></i> New Entry</button>
+            </div>
+        </div>
+        <div class="table-container">
+            <table class="data-table" id="journal-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Account</th>
+                        <th>Description</th>
+                        <th>Debit</th>
+                        <th>Credit</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+      </div>
+      <!-- Modal for new entry -->
+      <div id="journal-modal" class="modal" style="display: none;">
+              <div class="modal-content card" style="max-width: 600px; margin: 10% auto;">
+              <h3 id="journal-modal-title">New Journal Entry</h3>
+              <input type="hidden" id="j-edit-id" value="">
+              <div class="form-group">
+                  <label>Date</label>
+                  <input type="date" id="j-date">
+              </div>
+              <div class="form-group">
+                  <label>Description (Narration)</label>
+                  <input type="text" id="j-desc">
+              </div>
+              <div class="j-split-layout">
+                  <div class="j-col">
+                      <h4>Debit</h4>
+                      <div class="form-group">
+                          <label>Account</label>
+                          <input type="text" id="j-debit-acc" placeholder="e.g. Cash, Rent">
+                      </div>
+                      <div class="form-group">
+                          <label>Amount (₹)</label>
+                          <input type="number" id="j-debit-amt" min="0" step="0.01">
+                      </div>
+                  </div>
+                  <div class="j-col">
+                      <h4>Credit</h4>
+                      <div class="form-group">
+                          <label>Account</label>
+                          <input type="text" id="j-credit-acc" placeholder="e.g. Sales, Capital">
+                      </div>
+                      <div class="form-group">
+                          <label>Amount (₹)</label>
+                          <input type="number" id="j-credit-amt" min="0" step="0.01">
+                      </div>
+                  </div>
+              </div>
+              <div class="actions" style="margin-top: 1rem; justify-content: flex-end; display: flex; gap: 1rem;">
+                  <button id="j-cancel-btn" class="btn btn-secondary">Cancel</button>
+                  <button id="j-save-btn" class="btn btn-primary">Save Entry</button>
+              </div>
+          </div>
+      </div>
+  </template>
+
+  <template id="tpl-ledger">
+    <div class="card">
+        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
+            <h2>Ledger Account:</h2>
+            <select id="ledger-acc-select" class="custom-select" style="max-width: 300px; padding: 0.5rem; border-radius: 4px; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary);">
+                <option value="">Select Account...</option>
+            </select>
+        </div>
+        <div class="table-container">
+            <table class="data-table" id="ledger-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Particulars</th>
+                        <th>Debit</th>
+                        <th>Credit</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+  </template>
+
+  <template id="tpl-trial-balance">
+    <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Trial Balance</h2>
+        <div class="table-container">
+            <table class="data-table" id="tb-table">
+                <thead>
+                    <tr>
+                        <th>Account Name</th>
+                        <th style="text-align: right;">Debit Balance</th>
+                        <th style="text-align: right;">Credit Balance</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr class="total-row" style="background: var(--bg-tertiary);">
+                        <td><strong>Total</strong></td>
+                        <td style="text-align: right;" id="tb-total-debit"><strong>₹ 0.00</strong></td>
+                        <td style="text-align: right;" id="tb-total-credit"><strong>₹ 0.00</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+  </template>
+
+  <template id="tpl-cash-book">
+      <div class="card">
+        <h2>Cash Book</h2>
+        <p class="text-muted" style="margin-bottom: 1.5rem;">All transactions affecting the 'Cash' account.</p>
+        <div class="table-container">
+            <table class="data-table" id="cash-book-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Particulars</th>
+                        <th>Receipts (In)</th>
+                        <th>Payments (Out)</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+      </div>
+  </template>
+
+  <template id="tpl-financial-statements">
+    <div class="fs-layout" style="display: flex; flex-direction: column; gap: 2rem;">
+        <div class="card">
+            <h2 style="text-align: center;">Income Statement (P&L)</h2>
+            <div class="table-container" style="margin-top: 1.5rem;">
+                <table class="data-table fs-table" id="is-table">
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="fs-result" id="is-result" style="margin-top: 1rem; padding: 1rem; border-radius: var(--radius-md); text-align: center; font-weight: bold; font-size: 1.2rem; background: var(--bg-tertiary);">
+            </div>
+        </div>
+        <div class="card">
+            <h2 style="text-align: center;">Balance Sheet</h2>
+            <div class="table-container" style="margin-top: 1.5rem;">
+                <table class="data-table fs-table" id="bs-table">
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="fs-result" id="bs-result" style="margin-top: 1rem; padding: 1rem; border-radius: var(--radius-md); text-align: center; font-weight: bold; font-size: 1.2rem; background: rgba(59, 130, 246, 0.1); color: var(--accent);">
+                Total Assets = Total Liabilities + Equity
+            </div>
+        </div>
+    </div>
+  </template>
+
+  <script type="module" src="app.js?v=13"></script>
+</body>
+</html>
+
