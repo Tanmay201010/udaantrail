@@ -295,46 +295,137 @@ function initDashboard() {
 function initInventory() {
     renderInventoryTable();
 
-    document.getElementById('new-item-btn').addEventListener('click', () => {
-        document.getElementById('inventory-modal').style.display = 'block';
-        document.getElementById('inv-modal-title').textContent = 'Add New Product';
-        document.getElementById('inv-edit-id').value = '';
-        document.getElementById('inv-name').value = '';
-        document.getElementById('inv-consignor').value = '';
-        document.getElementById('inv-qty').value = '1';
-        document.getElementById('inv-price').value = '';
-    });
+    // New item button
+    const newItemBtn = document.getElementById('new-item-btn');
+    if (newItemBtn) {
+        newItemBtn.addEventListener('click', () => {
+            document.getElementById('inventory-modal').style.display = 'block';
+            document.getElementById('inv-modal-title').textContent = 'Add New Product';
+            document.getElementById('inv-edit-id').value = '';
+            document.getElementById('inv-name').value = '';
+            document.getElementById('inv-consignor').value = '';
+            document.getElementById('inv-qty').value = '1';
+            document.getElementById('inv-price').value = '';
+        });
+    }
 
-    document.getElementById('inv-cancel-btn').addEventListener('click', () => {
-        document.getElementById('inventory-modal').style.display = 'none';
-    });
+    // Cancel modal
+    const cancelBtn = document.getElementById('inv-cancel-btn');
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', () => {
+            document.getElementById('inventory-modal').style.display = 'none';
+        });
+    }
 
-    document.getElementById('inv-save-btn').addEventListener('click', () => {
-        const editId = document.getElementById('inv-edit-id').value;
-        const name = document.getElementById('inv-name').value.trim();
-        const consignor = document.getElementById('inv-consignor').value.trim();
-        const qty = parseInt(document.getElementById('inv-qty').value) || 0;
-        const price = parseFloat(document.getElementById('inv-price').value) || 0;
+    // Save product
+    const saveBtn = document.getElementById('inv-save-btn');
+    if (saveBtn) {
+        saveBtn.addEventListener('click', async () => {
+            const editId = document.getElementById('inv-edit-id').value;
+            const name = document.getElementById('inv-name').value.trim();
+            const consignor = document.getElementById('inv-consignor').value.trim();
+            const qty = parseInt(document.getElementById('inv-qty').value) || 0;
+            const price = parseFloat(document.getElementById('inv-price').value) || 0;
 
-        if (!name || qty <= 0 || price <= 0) {
-            alert('Please fill all required fields.');
-            return;
-        }
-
-        if (editId) {
-            const idx = appData.inventory.findIndex(i => String(i.id) === String(editId));
-            if (idx >= 0) {
-                appData.inventory[idx] = { id: editId, name, consignor, qty, price };
+            if (!name || qty <= 0 || price <= 0) {
+                alert('Please fill all required fields (Name, Qty > 0, Price > 0).');
+                return;
             }
-        } else {
-            appData.inventory.push({ id: uid(), name, consignor, qty, price });
-        }
 
-        saveLocal();
-        syncData();
-        document.getElementById('inventory-modal').style.display = 'none';
-        renderInventoryTable();
+            if (editId) {
+                const idx = appData.inventory.findIndex(i => String(i.id) === String(editId));
+                if (idx >= 0) {
+                    appData.inventory[idx] = { id: editId, name, consignor, qty, price };
+                }
+            } else {
+                appData.inventory.push({ id: uid(), name, consignor, qty, price });
+            }
+
+            saveLocal();
+            await syncData();
+            document.getElementById('inventory-modal').style.display = 'none';
+            renderInventoryTable();
+        });
+    }
+
+    // Stock Audit & Reconcile button
+    const reconcileBtn = document.getElementById('reconcile-stock-btn');
+    if (reconcileBtn) {
+        reconcileBtn.addEventListener('click', () => {
+            openStockReconcileModal();
+        });
+    }
+
+    const recCloseBtn = document.getElementById('reconcile-close-btn');
+    const recCancelBtn = document.getElementById('reconcile-cancel-btn');
+    if (recCloseBtn) {
+        recCloseBtn.addEventListener('click', () => {
+            document.getElementById('reconcile-modal').style.display = 'none';
+        });
+    }
+    if (recCancelBtn) {
+        recCancelBtn.addEventListener('click', () => {
+            document.getElementById('reconcile-modal').style.display = 'none';
+        });
+    }
+
+    const recApplyBtn = document.getElementById('reconcile-apply-btn');
+    if (recApplyBtn) {
+        recApplyBtn.addEventListener('click', async () => {
+            const inputs = document.querySelectorAll('.reconcile-qty-input');
+            inputs.forEach(inp => {
+                const id = inp.getAttribute('data-id');
+                const val = parseInt(inp.value, 10);
+                const inv = appData.inventory.find(i => String(i.id) === String(id));
+                if (inv && !isNaN(val)) {
+                    inv.qty = val;
+                }
+            });
+            saveLocal();
+            await syncData();
+            document.getElementById('reconcile-modal').style.display = 'none';
+            renderInventoryTable();
+            alert('✓ Inventory stock updated and synchronized successfully!');
+        });
+    }
+}
+
+function openStockReconcileModal() {
+    const modal = document.getElementById('reconcile-modal');
+    const tbody = document.querySelector('#reconcile-table tbody');
+    if (!modal || !tbody) return;
+
+    // Calculate total sold for each inventory item from POS sales
+    const soldCounts = {};
+    (appData.pos || []).forEach(b => {
+        (b.items || []).forEach(item => {
+            const key = item.id || (item.name || '').trim().toLowerCase();
+            soldCounts[key] = (soldCounts[key] || 0) + (parseInt(item.qty, 10) || 0);
+        });
     });
+
+    if (appData.inventory.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--text-secondary);padding:1rem;">No inventory products found.</td></tr>';
+    } else {
+        tbody.innerHTML = appData.inventory.map(item => {
+            const keyById = item.id;
+            const keyByName = (item.name || '').trim().toLowerCase();
+            const totalSold = soldCounts[keyById] || soldCounts[keyByName] || 0;
+            return `
+                <tr>
+                    <td><strong>${item.name}</strong>${item.consignor ? ` <span style="font-size:0.75rem;color:var(--text-secondary);">(${item.consignor})</span>` : ''}</td>
+                    <td>${item.qty} units</td>
+                    <td style="color:var(--accent);font-weight:600;">${totalSold} units</td>
+                    <td>
+                        <input type="number" class="reconcile-qty-input" data-id="${item.id}" value="${item.qty}" style="width:90px;padding:0.35rem 0.5rem;border-radius:var(--radius-md);border:1px solid var(--border);background:var(--bg-primary);color:var(--text-primary);">
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    modal.style.display = 'block';
+    lucide.createIcons();
 }
 
 function renderInventoryTable() {
@@ -403,12 +494,11 @@ function initPOS() {
         datalist.innerHTML = '';
 
         appData.inventory.forEach(item => {
-            if (item.qty > 0) {
-                const opt = document.createElement('option');
-                opt.value = `${item.name}${item.consignor ? ' (' + item.consignor + ')' : ''} [Stock: ${item.qty}] — ₹ ${item.price}`;
-                opt.setAttribute('data-id', item.id);
-                datalist.appendChild(opt);
-            }
+            const stockText = item.qty > 0 ? `Stock: ${item.qty}` : 'Out of Stock (0)';
+            const opt = document.createElement('option');
+            opt.value = `${item.name}${item.consignor ? ' (' + item.consignor + ')' : ''} [${stockText}] — ₹ ${item.price}`;
+            opt.setAttribute('data-id', item.id);
+            datalist.appendChild(opt);
         });
     }
 
@@ -417,44 +507,56 @@ function initPOS() {
         const v = val.trim().toLowerCase();
         // 1. Check exact display match or name match
         let found = appData.inventory.find(i => {
-            if (i.qty <= 0) return false;
-            const formatted = `${i.name}${i.consignor ? ' (' + i.consignor + ')' : ''} [stock: ${i.qty}] — ₹ ${i.price}`.toLowerCase();
+            const stockText = i.qty > 0 ? `stock: ${i.qty}` : 'out of stock (0)';
+            const formatted = `${i.name}${i.consignor ? ' (' + i.consignor + ')' : ''} [${stockText}] — ₹ ${i.price}`.toLowerCase();
             return formatted === v || i.name.toLowerCase() === v;
         });
         if (found) return found;
 
         // 2. Match startsWith
-        found = appData.inventory.find(i => i.qty > 0 && (v.startsWith(i.name.toLowerCase()) || i.name.toLowerCase().startsWith(v)));
+        found = appData.inventory.find(i => v.startsWith(i.name.toLowerCase()) || i.name.toLowerCase().startsWith(v));
         if (found) return found;
 
         // 3. Match includes
-        found = appData.inventory.find(i => i.qty > 0 && (i.name.toLowerCase().includes(v) || (i.consignor && i.consignor.toLowerCase().includes(v))));
+        found = appData.inventory.find(i => i.name.toLowerCase().includes(v) || (i.consignor && i.consignor.toLowerCase().includes(v)));
         return found || null;
     }
 
     const prodInput = document.getElementById('pos-product-input');
     const priceInput = document.getElementById('pos-sale-price');
+    const stockBadge = document.getElementById('pos-stock-badge');
+
+    function updateStockIndicator() {
+        if (!prodInput) return;
+        const inv = getSelectedInventoryItem(prodInput.value);
+        if (inv) {
+            if (priceInput && (!priceInput.value || priceInput.value === '0')) {
+                priceInput.value = inv.price || '';
+            }
+            if (stockBadge) {
+                if (inv.qty > 0) {
+                    stockBadge.textContent = `Available: ${inv.qty} units`;
+                    stockBadge.style.color = 'var(--success)';
+                } else {
+                    stockBadge.textContent = `⚠ Out of Stock (${inv.qty})`;
+                    stockBadge.style.color = 'var(--danger)';
+                }
+            }
+        } else {
+            if (stockBadge) stockBadge.textContent = '';
+        }
+    }
 
     if (prodInput) {
-        prodInput.addEventListener('input', () => {
-            const inv = getSelectedInventoryItem(prodInput.value);
-            if (inv && priceInput) {
-                priceInput.value = inv.price || '';
-            }
-        });
-        prodInput.addEventListener('change', () => {
-            const inv = getSelectedInventoryItem(prodInput.value);
-            if (inv && priceInput) {
-                priceInput.value = inv.price || '';
-            }
-        });
+        prodInput.addEventListener('input', updateStockIndicator);
+        prodInput.addEventListener('change', updateStockIndicator);
     }
 
     function renderPosItems() {
         const container = document.getElementById('pos-items-container');
         if (!container) return;
         if (posItems.length === 0) {
-            container.innerHTML = '<p style="color:var(--text-secondary);text-align:center;">No items added yet.</p>';
+            container.innerHTML = '<p style="color:var(--text-secondary);text-align:center;padding:1rem;">No items added yet.</p>';
             return;
         }
         let total = 0;
@@ -473,16 +575,19 @@ function initPOS() {
                 <tbody>
                     ${posItems.map((item, idx) => `
                         <tr>
-                            <td>${item.name}</td>
-                            <td style="text-align:right;">${item.qty}</td>
+                            <td><strong>${item.name}</strong>${item.consignor ? ` <span style="font-size:0.75rem;color:var(--text-secondary);">(${item.consignor})</span>` : ''}</td>
+                            <td style="text-align:right;font-weight:600;">${item.qty}</td>
                             <td style="text-align:right;">${fmt(item.salePrice)}</td>
-                            <td style="text-align:right;">${fmt(item.salePrice * item.qty)}</td>
-                            <td><button class="btn btn-sm btn-secondary pos-rm-btn" data-idx="${idx}">✕</button></td>
+                            <td style="text-align:right;font-weight:600;">${fmt(item.salePrice * item.qty)}</td>
+                            <td style="text-align:right;"><button class="btn btn-sm btn-secondary pos-rm-btn" data-idx="${idx}" style="color:var(--danger);padding:0.2rem 0.5rem;">✕</button></td>
                         </tr>
                     `).join('')}
                 </tbody>
             </table>
-            <p style="text-align:right;font-weight:bold;margin-top:0.5rem;">Total: ${fmt(total)}</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem;padding:0.5rem;background:var(--bg-tertiary);border-radius:var(--radius-md);">
+                <span>Items: <strong>${posItems.reduce((s,i) => s + i.qty, 0)}</strong></span>
+                <span style="font-weight:bold;font-size:1.1rem;">Grand Total: <span style="color:var(--primary);">${fmt(total)}</span></span>
+            </div>
         `;
         container.querySelectorAll('.pos-rm-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -498,7 +603,7 @@ function initPOS() {
         const salePrice = parseFloat(priceInput ? priceInput.value : 0);
 
         if (!inv) {
-            alert('Please select or type an available item from inventory.');
+            alert('Please select or type a valid product from inventory.');
             return;
         }
         if (!salePrice || salePrice <= 0) {
@@ -513,9 +618,22 @@ function initPOS() {
             return;
         }
 
-        const existing = posItems.find(i => String(i.id) === String(inv.id));
+        const existing = posItems.find(i => String(i.id) === String(inv.id) || (i.name || '').toLowerCase() === (inv.name || '').toLowerCase());
+        const totalCartQty = (existing ? existing.qty : 0) + addQty;
+
+        if (inv.qty <= 0) {
+            if (!confirm(`Warning: "${inv.name}" is currently out of stock (Available: ${inv.qty}). Do you still want to proceed?`)) {
+                return;
+            }
+        } else if (totalCartQty > inv.qty) {
+            if (!confirm(`Warning: Only ${inv.qty} unit(s) available in stock. Cart will have ${totalCartQty}. Proceed anyway?`)) {
+                return;
+            }
+        }
+
         if (existing) {
             existing.qty += addQty;
+            existing.salePrice = salePrice; // update with latest entered price
         } else {
             posItems.push({ id: inv.id, name: inv.name, consignor: inv.consignor, costPrice: inv.price, salePrice: salePrice, qty: addQty });
         }
@@ -527,6 +645,7 @@ function initPOS() {
         }
         if (priceInput) priceInput.value = '';
         if (qtyInput) qtyInput.value = '1';
+        if (stockBadge) stockBadge.textContent = '';
         populatePosProductDatalist();
         renderPosItems();
     });
@@ -534,12 +653,12 @@ function initPOS() {
     async function saveBill(withPrint) {
         const customer = document.getElementById('pos-customer').value.trim() || 'Walk-in Customer';
         const note = document.getElementById('pos-note').value;
-        if (posItems.length === 0) { alert('Add at least one item.'); return; }
+        if (posItems.length === 0) { alert('Please add at least one item to the bill.'); return; }
         const total = posItems.reduce((s, i) => s + i.salePrice * i.qty, 0);
 
-        // Pre-sync with GitHub to pull in any invoices generated by other devices in the meantime
+        // Pre-sync latest data from GitHub to prevent invoice number collision
         if (settings.pat && settings.owner && settings.repo) {
-            updateSyncStatus('Syncing latest before sale...', 'warning');
+            updateSyncStatus('Syncing latest before billing...', 'warning');
             try {
                 await fetchFromGitHub(false);
             } catch(e) {}
@@ -547,6 +666,7 @@ function initPOS() {
 
         const nextNum = getNextInvoiceNumber();
         const invoiceNo = '#' + String(nextNum).padStart(6, '0');
+        const terminalName = (settings && settings.terminal) ? settings.terminal.trim() : (localStorage.getItem('udaanTerminal') || 'Counter 1');
 
         const bill = {
             id: uid(),
@@ -555,38 +675,45 @@ function initPOS() {
             customer,
             items: posItems.map(i => ({...i})),
             total,
-            note
+            note,
+            terminal: terminalName
         };
         appData.pos.push(bill);
         appData.nextInvoice = nextNum + 1;
 
-        // Deduct from inventory
+        // Deduct sold quantities from inventory
         posItems.forEach(pi => {
-            const inv = appData.inventory.find(i => String(i.id) === String(pi.id));
-            if (inv) inv.qty -= pi.qty;
+            const inv = appData.inventory.find(i => String(i.id) === String(pi.id) || (i.name || '').toLowerCase() === (pi.name || '').toLowerCase());
+            if (inv) {
+                inv.qty = (parseInt(inv.qty, 10) || 0) - (parseInt(pi.qty, 10) || 0);
+            }
         });
 
-        // Auto journal entry for cash/UPI sale
+        // Double-entry accounting: route payment to Cash vs Bank/UPI
+        const isBankPayment = note.toLowerCase().includes('upi') || note.toLowerCase().includes('bank') || note.toLowerCase().includes('card');
+        const debitAccount = isBankPayment ? 'Bank' : 'Cash';
         const jEntry = {
-            id: uid(),
+            id: "j_" + bill.id,
             date: bill.date,
-            desc: `Sale - Invoice ${bill.invoiceNo} to ${customer}`,
-            debitAcc: 'Cash',
+            desc: `Sale - Invoice ${bill.invoiceNo} to ${customer} [${note}] (${terminalName})`,
+            debitAcc: debitAccount,
             debitAmt: total,
             creditAcc: 'Sales',
             creditAmt: total
         };
         appData.journal.push(jEntry);
+
         saveLocal();
         await syncData();
 
         if (withPrint) generateAndPrintBill(bill);
 
-        // Reset
+        // Reset POS Form
         posItems = [];
         document.getElementById('pos-customer').value = '';
         if (prodInput) prodInput.value = '';
         if (priceInput) priceInput.value = '';
+        if (stockBadge) stockBadge.textContent = '';
         const qtyInp = document.getElementById('pos-qty');
         if (qtyInp) qtyInp.value = '1';
         document.getElementById('pos-no').value = '#' + String(getNextInvoiceNumber()).padStart(6, '0');
@@ -763,7 +890,15 @@ function initBillHistory() {
                 const id = btn.getAttribute('data-id');
                 const bill = appData.pos.find(b => String(b.id) === String(id));
                 if (!bill) return;
-                if (!confirm(`Are you sure you want to delete Invoice ${bill.invoiceNo}?`)) return;
+                if (!confirm(`Are you sure you want to delete Invoice ${bill.invoiceNo}? All sold items will be returned to inventory stock.`)) return;
+
+                // Restore all items back to inventory stock
+                (bill.items || []).forEach(item => {
+                    const inv = appData.inventory.find(i => String(i.id) === String(item.id) || (i.name || '').trim().toLowerCase() === (item.name || '').trim().toLowerCase());
+                    if (inv) {
+                        inv.qty = (parseInt(inv.qty, 10) || 0) + (parseInt(item.qty, 10) || 0);
+                    }
+                });
 
                 appData.pos = appData.pos.filter(b => String(b.id) !== String(id));
                 // Delete matching journal entry
@@ -895,6 +1030,32 @@ function initBillHistory() {
             const note = document.getElementById('edit-bill-payment').value;
             const newTotal = editModalItems.reduce((sum, i) => sum + (parseFloat(i.salePrice) || 0) * (parseInt(i.qty, 10) || 0), 0);
 
+            // Calculate inventory stock differential adjustments
+            const oldItemMap = {};
+            (bill.items || []).forEach(item => {
+                const key = item.id || (item.name || '').trim().toLowerCase();
+                oldItemMap[key] = (oldItemMap[key] || 0) + (parseInt(item.qty, 10) || 0);
+            });
+
+            const newItemMap = {};
+            editModalItems.forEach(item => {
+                const key = item.id || (item.name || '').trim().toLowerCase();
+                newItemMap[key] = (newItemMap[key] || 0) + (parseInt(item.qty, 10) || 0);
+            });
+
+            const allKeys = new Set([...Object.keys(oldItemMap), ...Object.keys(newItemMap)]);
+            allKeys.forEach(key => {
+                const oldQty = oldItemMap[key] || 0;
+                const newQty = newItemMap[key] || 0;
+                const diff = oldQty - newQty; // diff > 0 => return to stock; diff < 0 => deduct more
+                if (diff !== 0) {
+                    const inv = appData.inventory.find(i => String(i.id) === String(key) || (i.name || '').trim().toLowerCase() === key.toLowerCase());
+                    if (inv) {
+                        inv.qty = (parseInt(inv.qty, 10) || 0) + diff;
+                    }
+                }
+            });
+
             // Update Bill
             bill.customer = customer;
             bill.date = date;
@@ -903,13 +1064,16 @@ function initBillHistory() {
             bill.total = newTotal;
 
             // Reconcile matching journal entry
+            const isBankPayment = note.toLowerCase().includes('upi') || note.toLowerCase().includes('bank') || note.toLowerCase().includes('card');
+            const debitAccount = isBankPayment ? 'Bank' : 'Cash';
             const jEntry = appData.journal.find(j => 
                 String(j.id) === "j_" + String(billId) || 
                 ((j.desc || '').includes(bill.invoiceNo))
             );
             if (jEntry) {
                 jEntry.date = date;
-                jEntry.desc = `Sale - Invoice ${bill.invoiceNo} to ${customer}`;
+                jEntry.desc = `Sale - Invoice ${bill.invoiceNo} to ${customer} [${note}]`;
+                jEntry.debitAcc = debitAccount;
                 jEntry.debitAmt = newTotal;
                 jEntry.creditAmt = newTotal;
             }
@@ -1585,13 +1749,18 @@ function initSettingsView() {
     document.getElementById('gh-owner').value = settings.owner || '';
     document.getElementById('gh-repo').value = settings.repo || '';
     document.getElementById('gh-path').value = settings.path || 'data.json';
+    const termInput = document.getElementById('gh-terminal');
+    if (termInput) termInput.value = settings.terminal || localStorage.getItem('udaanTerminal') || 'Counter 1';
 
     document.getElementById('save-settings-btn').addEventListener('click', () => {
+        const terminalVal = document.getElementById('gh-terminal') ? document.getElementById('gh-terminal').value.trim() : 'Counter 1';
+        localStorage.setItem('udaanTerminal', terminalVal || 'Counter 1');
         settings = {
             pat: document.getElementById('gh-pat').value.trim(),
             owner: document.getElementById('gh-owner').value.trim() || 'Tanmay201010',
             repo: document.getElementById('gh-repo').value.trim() || 'udaan',
             path: document.getElementById('gh-path').value.trim() || 'data.json',
+            terminal: terminalVal || 'Counter 1'
         };
         localStorage.setItem('udaanSettings', JSON.stringify(settings));
         const msgEl = document.getElementById('settings-msg');
@@ -1703,22 +1872,35 @@ async function fetchFromGitHub(refreshView = true) {
             data = JSON.parse(decoded);
         }
 
-        // Smart merge POS bills (union by ID or invoiceNo + total + date)
+        // Smart merge POS bills (union by unique ID without dropping any sales)
         const localBills = appData.pos || [];
         const remoteBills = data.pos || [];
         const billMap = new Map();
         [...remoteBills, ...localBills].forEach(b => {
-            const key = b.id || `${b.invoiceNo}_${b.total}_${b.date}`;
-            billMap.set(key, b);
+            if (!b.id) b.id = uid();
+            billMap.set(String(b.id), b);
         });
 
-        // Smart merge Journal entries
+        const mergedBills = Array.from(billMap.values());
+        const invoiceNoSeen = new Set();
+        mergedBills.forEach(b => {
+            if (!b.invoiceNo) {
+                b.invoiceNo = '#' + String(getNextInvoiceNumber()).padStart(6, '0');
+            }
+            if (invoiceNoSeen.has(b.invoiceNo)) {
+                const termTag = b.terminal ? b.terminal.replace(/\s+/g, '') : 'dup';
+                b.invoiceNo = `${b.invoiceNo}-${termTag}`;
+            }
+            invoiceNoSeen.add(b.invoiceNo);
+        });
+
+        // Smart merge Journal entries by unique ID
         const localJournal = appData.journal || [];
         const remoteJournal = data.journal || [];
         const jMap = new Map();
         [...remoteJournal, ...localJournal].forEach(j => {
-            const key = j.id || `${j.date}_${j.desc}_${j.debitAmt}_${j.creditAmt}`;
-            jMap.set(key, j);
+            if (!j.id) j.id = uid();
+            jMap.set(String(j.id), j);
         });
 
         // Inventory
@@ -1726,7 +1908,7 @@ async function fetchFromGitHub(refreshView = true) {
 
         appData = {
             inventory: inventory,
-            pos: Array.from(billMap.values()),
+            pos: mergedBills,
             journal: Array.from(jMap.values()),
             nextInvoice: Math.max(data.nextInvoice || 1, getNextInvoiceNumber())
         };

@@ -166,6 +166,12 @@
         <label>File Path</label>
         <input type="text" id="gh-path" placeholder="e.g., data.json" value="data.json">
       </div>
+
+      <div class="form-group">
+        <label>Register / Terminal Identifier</label>
+        <input type="text" id="gh-terminal" placeholder="e.g. Phone A, Counter 1, Register 2" value="Counter 1">
+        <small style="color:var(--text-secondary);">Used to distinguish sales and prevent invoice collisions across multiple phones/devices.</small>
+      </div>
       
       <div class="actions" style="margin-top: 2rem;">
          <button id="save-settings-btn" class="btn btn-primary">Save Configuration & Test</button>
@@ -187,9 +193,12 @@
 
   <template id="tpl-inventory">
       <div class="card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
             <h2>Inventory Management</h2>
-            <button id="new-item-btn" class="btn btn-primary"><i data-lucide="plus"></i> Add Product</button>
+            <div style="display:flex; gap:0.5rem;">
+              <button id="reconcile-stock-btn" class="btn btn-secondary"><i data-lucide="scale"></i> Audit & Reconcile Stock</button>
+              <button id="new-item-btn" class="btn btn-primary"><i data-lucide="plus"></i> Add Product</button>
+            </div>
           </div>
           <div class="table-container">
               <table class="data-table" id="inventory-table">
@@ -233,6 +242,35 @@
               </div>
           </div>
       </div>
+      <!-- Reconcile Stock Modal -->
+      <div id="reconcile-modal" class="modal" style="display: none;">
+          <div class="modal-content card" style="max-width: 700px; margin: 5% auto; max-height: 85vh; display: flex; flex-direction: column;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                  <h3>📊 Stock Audit & Sales Reconciliation</h3>
+                  <button id="reconcile-close-btn" class="btn btn-secondary btn-sm" style="padding:0.25rem 0.5rem;">✕</button>
+              </div>
+              <p style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:1rem;">
+                  This tool audits total units sold across all sales invoices in Bill History and calculates accurate remaining stock.
+              </p>
+              <div class="table-container" style="flex: 1; overflow-y: auto; max-height: 400px;">
+                  <table class="data-table" id="reconcile-table">
+                      <thead>
+                          <tr>
+                              <th>Product</th>
+                              <th>Current Stock</th>
+                              <th>Total Sold</th>
+                              <th>Remaining Stock</th>
+                          </tr>
+                      </thead>
+                      <tbody></tbody>
+                  </table>
+              </div>
+              <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+                  <button id="reconcile-cancel-btn" class="btn btn-secondary">Close</button>
+                  <button id="reconcile-apply-btn" class="btn btn-primary"><i data-lucide="check"></i> Auto-Apply Reconciled Stock</button>
+              </div>
+          </div>
+      </div>
   </template>
 
   <template id="tpl-pos">
@@ -257,7 +295,10 @@
             <h3 style="margin-top: 1rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">Add Items</h3>
             <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; align-items: flex-end; flex-wrap: wrap;">
                 <div class="form-group" style="flex: 2; min-width: 160px; margin-bottom: 0;">
-                    <label>Select Product (Search or Pick)</label>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="margin-bottom:0.25rem;">Select Product (Search or Pick)</label>
+                        <span id="pos-stock-badge" style="font-size:0.75rem; color:var(--text-secondary);"></span>
+                    </div>
                     <input type="text" id="pos-product-input" list="pos-product-datalist" placeholder="Click or type to search item..." class="custom-select" autocomplete="off" style="width: 100%;">
                     <datalist id="pos-product-datalist"></datalist>
                 </div>
@@ -598,7 +639,7 @@
     </div>
   </template>
 
-  <script type="module" src="app.js?v=15"></script>
+  <script type="module" src="app.js?v=16"></script>
 </body>
 </html>
 
