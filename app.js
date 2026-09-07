@@ -57,25 +57,23 @@ function deduplicateJournal(journalList) {
 
     journalList.forEach(j => {
         if (!j) return;
-        // Check for sales entry vs manual entry
-        const invMatch = (j.desc || '').match(/Invoice\s+(#?\w+)/i) || (j.desc || '').match(/(#\d{4,6})/);
         let key;
-        if (invMatch) {
-            // Sale entry: strictly 1 journal entry per invoice number
-            const invNo = invMatch[1].toLowerCase().replace(/^#/, '');
-            key = `sale_inv_${invNo}`;
-        } else if (j.id && !String(j.id).startsWith('temp_')) {
-            // Manual entry
-            key = `manual_${j.date || ''}_${(j.desc || '').trim().toLowerCase()}_${j.debitAmt || 0}_${j.creditAmt || 0}_${(j.debitAcc || '').trim().toLowerCase()}_${(j.creditAcc || '').trim().toLowerCase()}`;
+        if (j.id && String(j.id).trim() !== '') {
+            key = String(j.id).trim();
         } else {
-            key = `manual_${j.date || ''}_${(j.desc || '').trim().toLowerCase()}_${j.debitAmt || 0}_${j.creditAmt || 0}_${(j.debitAcc || '').trim().toLowerCase()}_${(j.creditAcc || '').trim().toLowerCase()}`;
+            const invMatch = (j.desc || '').match(/Invoice\s+(#?\w+)/i) || (j.desc || '').match(/(#\d{4,6})/);
+            if (invMatch) {
+                const invNo = parseInvoiceNumber(invMatch[1]);
+                key = `sale_inv_${invNo}`;
+            } else {
+                key = `manual_${j.date || ''}_${(j.desc || '').trim().toLowerCase()}_${j.debitAmt || 0}_${j.creditAmt || 0}_${(j.debitAcc || '').trim().toLowerCase()}_${(j.creditAcc || '').trim().toLowerCase()}`;
+            }
         }
 
         if (!seen.has(key)) {
             if (!j.id) j.id = uid();
             seen.set(key, j);
         } else {
-            // If duplicate found, keep the existing one or merge
             const existing = seen.get(key);
             if (!existing.id && j.id) existing.id = j.id;
         }
@@ -772,10 +770,15 @@ function initPOS() {
         const invoiceNo = '#' + String(nextNum).padStart(6, '0');
         const terminalName = (settings && settings.terminal) ? settings.terminal.trim() : (localStorage.getItem('udaanTerminal') || 'Counter 1');
 
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+
         const bill = {
             id: uid(),
             invoiceNo: invoiceNo,
             date: document.getElementById('pos-date').value || today(),
+            time: timeStr,
+            createdAt: now.toISOString(),
             customer,
             items: posItems.map(i => ({...i})),
             total,
@@ -799,6 +802,8 @@ function initPOS() {
         const jEntry = {
             id: "j_" + bill.id,
             date: bill.date,
+            time: timeStr,
+            createdAt: now.toISOString(),
             desc: `Sale - Invoice ${bill.invoiceNo} to ${customer} [${note}] (${terminalName})`,
             debitAcc: debitAccount,
             debitAmt: total,
@@ -840,7 +845,9 @@ function generateAndPrintBill(bill) {
         </tr>
     `).join('');
 
+    const timeStr = bill.time || (bill.createdAt ? new Date(bill.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }) : '');
     const dateStr = bill.date ? new Date(bill.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+    const fullDateDisplay = dateStr + (timeStr ? ` at ${timeStr}` : '');
 
     const printHTML = `<!DOCTYPE html>
 <html lang="en">
@@ -954,10 +961,12 @@ function initBillHistory() {
             const itemSummary = (bill.items || [])
                 .map(i => `${i.name} ×${i.qty}`)
                 .join(', ');
+            const timeStr = bill.time || (bill.createdAt ? new Date(bill.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }) : '');
+            const dateDisplay = `${bill.date || '—'}${timeStr ? `<span style="font-size:0.75rem;color:var(--text-secondary);display:block;">${timeStr}</span>` : ''}`;
             return `
                 <tr>
                     <td><strong>${bill.invoiceNo || '—'}</strong></td>
-                    <td>${bill.date || '—'}</td>
+                    <td>${dateDisplay}</td>
                     <td>${bill.customer || 'Walk-in'}</td>
                     <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${itemSummary}">${itemSummary || '—'}</td>
                     <td>${bill.note || 'Cash'}</td>
@@ -1509,19 +1518,23 @@ function renderJournalTable() {
         tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-secondary);">No journal entries yet.</td></tr>';
         return;
     }
-    tbody.innerHTML = [...appData.journal].reverse().map(e => `
-        <tr>
-            <td>${e.date || ''}</td>
-            <td>${e.debitAcc || ''} / ${e.creditAcc || ''}</td>
-            <td>${e.desc || ''}</td>
-            <td>${e.debitAmt ? fmt(e.debitAmt) : '—'}</td>
-            <td>${e.creditAmt ? fmt(e.creditAmt) : '—'}</td>
-            <td style="display:flex;gap:0.5rem;">
-                <button class="btn btn-sm btn-secondary j-edit-btn" data-id="${e.id}">Edit</button>
-                <button class="btn btn-sm btn-secondary j-del-btn" data-id="${e.id}" style="color:var(--danger);">Del</button>
-            </td>
-        </tr>
-    `).join('');
+    tbody.innerHTML = [...appData.journal].reverse().map(e => {
+        const timeStr = e.time || (e.createdAt ? new Date(e.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }) : '');
+        const dateDisplay = `${e.date || ''}${timeStr ? `<span style="font-size:0.75rem;color:var(--text-secondary);display:block;">${timeStr}</span>` : ''}`;
+        return `
+            <tr>
+                <td>${dateDisplay}</td>
+                <td>${e.debitAcc || ''} / ${e.creditAcc || ''}</td>
+                <td>${e.desc || ''}</td>
+                <td>${e.debitAmt ? fmt(e.debitAmt) : '—'}</td>
+                <td>${e.creditAmt ? fmt(e.creditAmt) : '—'}</td>
+                <td style="display:flex;gap:0.5rem;">
+                    <button class="btn btn-sm btn-secondary j-edit-btn" data-id="${e.id}">Edit</button>
+                    <button class="btn btn-sm btn-secondary j-del-btn" data-id="${e.id}" style="color:var(--danger);">Del</button>
+                </td>
+            </tr>
+        `;
+    }).join('');
 }
 
 function exportJournalCSV() {
