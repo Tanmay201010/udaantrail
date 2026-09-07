@@ -923,24 +923,107 @@ function initBillHistory() {
         });
     }
 
-    // Initial render
-    render(filtered);
+    // Product dropdown population
+    const productSelect = document.getElementById('bill-product-filter');
+    if (productSelect) {
+        const productSet = new Set();
+        (appData.pos || []).forEach(b => {
+            (b.items || []).forEach(i => {
+                if (i.name && i.name.trim()) productSet.add(i.name.trim());
+            });
+        });
+        (appData.inventory || []).forEach(item => {
+            if (item.name && item.name.trim()) productSet.add(item.name.trim());
+        });
 
-    // Search
-    const searchInput = document.getElementById('bill-search');
-    if (searchInput) {
-        searchInput.addEventListener('input', () => {
-            const q = searchInput.value.trim().toLowerCase();
-            if (!q) {
-                render(filtered);
-                return;
-            }
-            render(filtered.filter(b =>
+        const sortedProducts = Array.from(productSet).sort((a, b) => a.localeCompare(b));
+        productSelect.innerHTML = '<option value="">All Products</option>' +
+            sortedProducts.map(p => `<option value="${p.replace(/"/g, '&quot;')}">${p}</option>`).join('');
+    }
+
+    function applyBillFilters() {
+        const searchInput = document.getElementById('bill-search');
+        const productSelect = document.getElementById('bill-product-filter');
+        const summaryEl = document.getElementById('bill-filter-summary');
+
+        const q = searchInput ? searchInput.value.trim().toLowerCase() : '';
+        const selectedProduct = productSelect ? productSelect.value : '';
+
+        let results = filtered;
+
+        // Filter by product dropdown if selected
+        if (selectedProduct) {
+            results = results.filter(b => 
+                (b.items || []).some(i => (i.name || '').trim().toLowerCase() === selectedProduct.toLowerCase())
+            );
+        }
+
+        // Filter by search query (checks customer, invoiceNo, date, and items name / consignor)
+        if (q) {
+            results = results.filter(b =>
                 (b.customer || '').toLowerCase().includes(q) ||
                 (b.invoiceNo || '').toLowerCase().includes(q) ||
-                (b.date || '').includes(q)
-            ));
-        });
+                (b.date || '').includes(q) ||
+                (b.items || []).some(i => 
+                    (i.name || '').toLowerCase().includes(q) || 
+                    (i.consignor || '').toLowerCase().includes(q)
+                )
+            );
+        }
+
+        // Update summary box if filtered
+        if (summaryEl) {
+            if (q || selectedProduct) {
+                summaryEl.style.display = 'flex';
+                let totalUnits = 0;
+                let totalFilteredRevenue = 0;
+
+                results.forEach(b => {
+                    totalFilteredRevenue += (parseFloat(b.total) || 0);
+                    (b.items || []).forEach(i => {
+                        if (selectedProduct) {
+                            if ((i.name || '').trim().toLowerCase() === selectedProduct.toLowerCase()) {
+                                totalUnits += (parseInt(i.qty, 10) || 0);
+                            }
+                        } else if (q) {
+                            if ((i.name || '').toLowerCase().includes(q) || (i.consignor || '').toLowerCase().includes(q)) {
+                                totalUnits += (parseInt(i.qty, 10) || 0);
+                            } else {
+                                totalUnits += (parseInt(i.qty, 10) || 0);
+                            }
+                        } else {
+                            totalUnits += (parseInt(i.qty, 10) || 0);
+                        }
+                    });
+                });
+
+                const productLabel = selectedProduct ? `<strong>${selectedProduct}</strong>` : (q ? `"${q}"` : 'filter');
+                summaryEl.innerHTML = `
+                    <span>🔍 Found <strong>${results.length}</strong> matching invoice${results.length === 1 ? '' : 's'} for ${productLabel}</span>
+                    <span style="display:inline-flex;gap:1rem;font-weight:600;">
+                        <span>Units Sold: <span style="color:var(--primary);">${totalUnits}</span></span>
+                        <span>Total Revenue: <span style="color:var(--primary);">${fmt(totalFilteredRevenue)}</span></span>
+                    </span>
+                `;
+            } else {
+                summaryEl.style.display = 'none';
+            }
+        }
+
+        render(results);
+    }
+
+    // Initial render
+    applyBillFilters();
+
+    // Filter listeners
+    if (productSelect) {
+        productSelect.addEventListener('change', applyBillFilters);
+    }
+
+    const searchInput = document.getElementById('bill-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', applyBillFilters);
     }
 
     // Export CSV
@@ -1563,6 +1646,41 @@ function updateSyncStatus(msg, type) {
     }
 }
 
+function decodeBase64Utf8(base64Str) {
+    if (!base64Str) return '';
+    const cleanB64 = base64Str.replace(/\s/g, '');
+    let str = '';
+    try {
+        const binStr = atob(cleanB64);
+        const bytes = new Uint8Array(binStr.length);
+        for (let i = 0; i < binStr.length; i++) {
+            bytes[i] = binStr.charCodeAt(i);
+        }
+        str = new TextDecoder('utf-8').decode(bytes);
+    } catch (e) {
+        try {
+            str = decodeURIComponent(escape(atob(cleanB64)));
+        } catch (e2) {
+            str = atob(cleanB64);
+        }
+    }
+    // Remove Byte Order Mark (BOM) / zero-width characters at start of string
+    return str.replace(/^\uFEFF/, '').trim();
+}
+
+function encodeBase64Utf8(str) {
+    try {
+        const bytes = new TextEncoder().encode(str);
+        let binStr = '';
+        for (let i = 0; i < bytes.length; i++) {
+            binStr += String.fromCharCode(bytes[i]);
+        }
+        return btoa(binStr);
+    } catch (e) {
+        return btoa(unescape(encodeURIComponent(str)));
+    }
+}
+
 async function fetchFromGitHub(refreshView = true) {
     if (!settings.pat || !settings.owner || !settings.repo) return;
     updateSyncStatus('Syncing...', 'warning');
@@ -1578,8 +1696,12 @@ async function fetchFromGitHub(refreshView = true) {
         }
         const json = await res.json();
         currentSha = json.sha;
-        const decoded = decodeURIComponent(escape(atob(json.content.replace(/\n/g, ''))));
-        const data = JSON.parse(decoded);
+        const decoded = decodeBase64Utf8(json.content);
+        
+        let data = { inventory: [], pos: [], journal: [], nextInvoice: 1 };
+        if (decoded && decoded !== '') {
+            data = JSON.parse(decoded);
+        }
 
         // Smart merge POS bills (union by ID or invoiceNo + total + date)
         const localBills = appData.pos || [];
@@ -1630,7 +1752,7 @@ async function syncData() {
     try {
         const url = `https://api.github.com/repos/${settings.owner}/${settings.repo}/contents/${settings.path || 'data.json'}`;
         const jsonStr = JSON.stringify(appData, null, 2);
-        const content = btoa(unescape(encodeURIComponent(jsonStr)));
+        const content = encodeBase64Utf8(jsonStr);
         const body = { message: 'UdaanPro data update', content };
         if (currentSha) body.sha = currentSha;
         
