@@ -2012,7 +2012,7 @@
     },
     {
       "id": "mtqw4kz4215gv",
-      "invoiceNo": "#000088-dup",
+      "invoiceNo": "#000089",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2038,7 +2038,7 @@
     },
     {
       "id": "mtqwa82xzbl7d",
-      "invoiceNo": "#000089",
+      "invoiceNo": "#000090",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2056,7 +2056,7 @@
     },
     {
       "id": "mtqw2r5x8fb07",
-      "invoiceNo": "#000090",
+      "invoiceNo": "#000091",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2074,7 +2074,7 @@
     },
     {
       "id": "mtqwgnx4rwk4a",
-      "invoiceNo": "#000090-dup",
+      "invoiceNo": "#000092",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2100,7 +2100,7 @@
     },
     {
       "id": "mtqw6qcj0tpob",
-      "invoiceNo": "#000091",
+      "invoiceNo": "#000093",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2118,7 +2118,7 @@
     },
     {
       "id": "mtqwiiduhu8xd",
-      "invoiceNo": "#000091-dup",
+      "invoiceNo": "#000094",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2136,7 +2136,7 @@
     },
     {
       "id": "mtqwl1d29no8f",
-      "invoiceNo": "#000092",
+      "invoiceNo": "#000095",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2154,7 +2154,7 @@
     },
     {
       "id": "mtqwfodpwwydu",
-      "invoiceNo": "#000093",
+      "invoiceNo": "#000096",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2172,7 +2172,7 @@
     },
     {
       "id": "mtqwpddym9jjl",
-      "invoiceNo": "#000093-dup",
+      "invoiceNo": "#000097",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2190,7 +2190,7 @@
     },
     {
       "id": "mtqwsp6mtjs9h",
-      "invoiceNo": "#000094",
+      "invoiceNo": "#000098",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2208,7 +2208,7 @@
     },
     {
       "id": "mtqw7qdwb5o72",
-      "invoiceNo": "#000095",
+      "invoiceNo": "#000099",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2242,7 +2242,7 @@
     },
     {
       "id": "mtqwu0xzaet7j",
-      "invoiceNo": "#000095-dup",
+      "invoiceNo": "#000100",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2268,7 +2268,7 @@
     },
     {
       "id": "mtqwip4chryt7",
-      "invoiceNo": "#000096",
+      "invoiceNo": "#000101",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2286,7 +2286,7 @@
     },
     {
       "id": "mtqwzcvoj60n9",
-      "invoiceNo": "#000096-dup",
+      "invoiceNo": "#000102",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2312,7 +2312,7 @@
     },
     {
       "id": "mtqx110fesggu",
-      "invoiceNo": "#000097",
+      "invoiceNo": "#000103",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2338,7 +2338,7 @@
     },
     {
       "id": "mtqx393z28jgc",
-      "invoiceNo": "#000098",
+      "invoiceNo": "#000104",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2364,7 +2364,7 @@
     },
     {
       "id": "mtqx6gp3uyv6s",
-      "invoiceNo": "#000099",
+      "invoiceNo": "#000105",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2390,7 +2390,7 @@
     },
     {
       "id": "mtqwng6v2lmnx",
-      "invoiceNo": "#000100",
+      "invoiceNo": "#000106",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2408,7 +2408,7 @@
     },
     {
       "id": "mtqx7hd45nsqk",
-      "invoiceNo": "#000100-dup",
+      "invoiceNo": "#000107",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2426,7 +2426,7 @@
     },
     {
       "id": "mtqwqq8eoos8x",
-      "invoiceNo": "#000101",
+      "invoiceNo": "#000108",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2452,7 +2452,7 @@
     },
     {
       "id": "mtqx7o9klevkj",
-      "invoiceNo": "#000101-dup",
+      "invoiceNo": "#000109",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2470,7 +2470,7 @@
     },
     {
       "id": "mtqx9l4q55gti",
-      "invoiceNo": "#000102",
+      "invoiceNo": "#000110",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2496,7 +2496,7 @@
     },
     {
       "id": "mtqxb6ynm1ctu",
-      "invoiceNo": "#000103",
+      "invoiceNo": "#000111",
       "date": "2026-09-07",
       "customer": "shrine",
       "items": [
@@ -2514,7 +2514,7 @@
     },
     {
       "id": "mtqwt9qobi6bn",
-      "invoiceNo": "#000104",
+      "invoiceNo": "#000112",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2540,7 +2540,7 @@
     },
     {
       "id": "mtqxbldn06cvf",
-      "invoiceNo": "#000104-dup",
+      "invoiceNo": "#000113",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2558,7 +2558,7 @@
     },
     {
       "id": "mtqxccect95p9",
-      "invoiceNo": "#000105",
+      "invoiceNo": "#000114",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2576,7 +2576,7 @@
     },
     {
       "id": "mtqwu0jc8bwsn",
-      "invoiceNo": "#000106",
+      "invoiceNo": "#000115",
       "date": "2026-09-07",
       "customer": "Nayua",
       "items": [
@@ -2602,7 +2602,7 @@
     },
     {
       "id": "mtqxdi6om6hhy",
-      "invoiceNo": "#000106-dup",
+      "invoiceNo": "#000116",
       "date": "2026-09-07",
       "customer": "sanajana",
       "items": [
@@ -2620,7 +2620,7 @@
     },
     {
       "id": "mtqxfsjrlxqu8",
-      "invoiceNo": "#000107",
+      "invoiceNo": "#000117",
       "date": "2026-09-07",
       "customer": "manan",
       "items": [
@@ -2638,7 +2638,7 @@
     },
     {
       "id": "mtqwxger39c5p",
-      "invoiceNo": "#000108",
+      "invoiceNo": "#000118",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2656,7 +2656,7 @@
     },
     {
       "id": "mtqxhfl3hfedt",
-      "invoiceNo": "#000108-dup",
+      "invoiceNo": "#000119",
       "date": "2026-09-07",
       "customer": "Tanmay",
       "items": [
@@ -2674,7 +2674,7 @@
     },
     {
       "id": "mtqwy7hpvj06f",
-      "invoiceNo": "#000109",
+      "invoiceNo": "#000120",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2692,7 +2692,7 @@
     },
     {
       "id": "mtqxl2m8bofvy",
-      "invoiceNo": "#000109-dup",
+      "invoiceNo": "#000121",
       "date": "2026-09-07",
       "customer": "tanmay",
       "items": [
@@ -2726,7 +2726,7 @@
     },
     {
       "id": "mtqxm2c6vhcd9",
-      "invoiceNo": "#000110",
+      "invoiceNo": "#000122",
       "date": "2026-09-07",
       "customer": "mohawk",
       "items": [
@@ -2744,7 +2744,7 @@
     },
     {
       "id": "mtqwzds71zjs5",
-      "invoiceNo": "#000111",
+      "invoiceNo": "#000123",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2762,7 +2762,7 @@
     },
     {
       "id": "mtqxmcat2tq7v",
-      "invoiceNo": "#000111-dup",
+      "invoiceNo": "#000124",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2780,7 +2780,7 @@
     },
     {
       "id": "mtqxqzim41ipo",
-      "invoiceNo": "#000112",
+      "invoiceNo": "#000125",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2798,7 +2798,7 @@
     },
     {
       "id": "mtqxr8upak8la",
-      "invoiceNo": "#000113",
+      "invoiceNo": "#000126",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2816,7 +2816,7 @@
     },
     {
       "id": "mtqxrkolqz7du",
-      "invoiceNo": "#000114",
+      "invoiceNo": "#000127",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2834,7 +2834,7 @@
     },
     {
       "id": "mtqxs52w9hdqa",
-      "invoiceNo": "#000115",
+      "invoiceNo": "#000128",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2860,7 +2860,7 @@
     },
     {
       "id": "mtqxu3fucyoz1",
-      "invoiceNo": "#000116",
+      "invoiceNo": "#000129",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2878,7 +2878,7 @@
     },
     {
       "id": "mtqxym5ozq78b",
-      "invoiceNo": "#000117",
+      "invoiceNo": "#000130",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2904,7 +2904,7 @@
     },
     {
       "id": "mtqy0raf5ag6d",
-      "invoiceNo": "#000118",
+      "invoiceNo": "#000131",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2930,7 +2930,7 @@
     },
     {
       "id": "mtqy1bkz2vcv5",
-      "invoiceNo": "#000119",
+      "invoiceNo": "#000132",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2948,7 +2948,7 @@
     },
     {
       "id": "mtqy45ybrmm27",
-      "invoiceNo": "#000120",
+      "invoiceNo": "#000133",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2966,7 +2966,7 @@
     },
     {
       "id": "mtqy5sz94n6yr",
-      "invoiceNo": "#000121",
+      "invoiceNo": "#000134",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -2984,7 +2984,7 @@
     },
     {
       "id": "mtqy6t4zne850",
-      "invoiceNo": "#000122",
+      "invoiceNo": "#000135",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3010,7 +3010,7 @@
     },
     {
       "id": "mtqy8dq3ezwed",
-      "invoiceNo": "#000123",
+      "invoiceNo": "#000136",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3044,7 +3044,7 @@
     },
     {
       "id": "mtqy8v3eldjil",
-      "invoiceNo": "#000124",
+      "invoiceNo": "#000137",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3062,7 +3062,7 @@
     },
     {
       "id": "mtqy9epf3pixl",
-      "invoiceNo": "#000125",
+      "invoiceNo": "#000138",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3080,7 +3080,7 @@
     },
     {
       "id": "mtqy9r6kuzxya",
-      "invoiceNo": "#000126",
+      "invoiceNo": "#000139",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3098,7 +3098,7 @@
     },
     {
       "id": "mtqyd4modbd5o",
-      "invoiceNo": "#000127",
+      "invoiceNo": "#000140",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3116,7 +3116,7 @@
     },
     {
       "id": "mtqydclq4iis1",
-      "invoiceNo": "#000128",
+      "invoiceNo": "#000141",
       "date": "2026-09-07",
       "customer": "Suhas",
       "items": [
@@ -3134,7 +3134,7 @@
     },
     {
       "id": "mtqyee61upiq6",
-      "invoiceNo": "#000129",
+      "invoiceNo": "#000142",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3152,7 +3152,7 @@
     },
     {
       "id": "mtqyfitxxl7l8",
-      "invoiceNo": "#000130",
+      "invoiceNo": "#000143",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3178,7 +3178,7 @@
     },
     {
       "id": "mtqygerk07cz5",
-      "invoiceNo": "#000131",
+      "invoiceNo": "#000144",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3204,7 +3204,7 @@
     },
     {
       "id": "mtqyij4lck6uh",
-      "invoiceNo": "#000132",
+      "invoiceNo": "#000145",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3230,7 +3230,7 @@
     },
     {
       "id": "mtqyk83rliqaz",
-      "invoiceNo": "#000133",
+      "invoiceNo": "#000146",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3248,7 +3248,7 @@
     },
     {
       "id": "mtqyknslm86y0",
-      "invoiceNo": "#000134",
+      "invoiceNo": "#000147",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3266,7 +3266,7 @@
     },
     {
       "id": "mtqymphaco1eq",
-      "invoiceNo": "#000135",
+      "invoiceNo": "#000148",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3300,7 +3300,7 @@
     },
     {
       "id": "mtqyorsy9jvah",
-      "invoiceNo": "#000136",
+      "invoiceNo": "#000149",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3342,7 +3342,7 @@
     },
     {
       "id": "mtqyqz2ufui1l",
-      "invoiceNo": "#000137",
+      "invoiceNo": "#000150",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3360,7 +3360,7 @@
     },
     {
       "id": "mtqyspf3487z8",
-      "invoiceNo": "#000138",
+      "invoiceNo": "#000151",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3378,7 +3378,7 @@
     },
     {
       "id": "mtqytifj9gzy3",
-      "invoiceNo": "#000139",
+      "invoiceNo": "#000152",
       "date": "2026-09-07",
       "customer": "100 rs left",
       "items": [
@@ -3396,7 +3396,7 @@
     },
     {
       "id": "mtqyuc7docqdk",
-      "invoiceNo": "#000140",
+      "invoiceNo": "#000153",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3414,7 +3414,7 @@
     },
     {
       "id": "mtqyvrbf9n1z2",
-      "invoiceNo": "#000141",
+      "invoiceNo": "#000154",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3432,7 +3432,7 @@
     },
     {
       "id": "mtqywdpzq41z4",
-      "invoiceNo": "#000142",
+      "invoiceNo": "#000155",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3458,7 +3458,7 @@
     },
     {
       "id": "mtqyxvbk99qd8",
-      "invoiceNo": "#000143",
+      "invoiceNo": "#000156",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3476,7 +3476,7 @@
     },
     {
       "id": "mtqz4wwc6kx9o",
-      "invoiceNo": "#000144",
+      "invoiceNo": "#000157",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3502,7 +3502,7 @@
     },
     {
       "id": "mtqz5s5bjy9zo",
-      "invoiceNo": "#000145",
+      "invoiceNo": "#000158",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3528,7 +3528,7 @@
     },
     {
       "id": "mtqz98o5m2s3i",
-      "invoiceNo": "#000146",
+      "invoiceNo": "#000159",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3578,7 +3578,7 @@
     },
     {
       "id": "mtqzaz9pje5t4",
-      "invoiceNo": "#000147",
+      "invoiceNo": "#000160",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3604,7 +3604,7 @@
     },
     {
       "id": "mtqzfpinx63kj",
-      "invoiceNo": "#000148",
+      "invoiceNo": "#000161",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3630,7 +3630,7 @@
     },
     {
       "id": "mtqzgotyvcqna",
-      "invoiceNo": "#000149",
+      "invoiceNo": "#000162",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3656,7 +3656,7 @@
     },
     {
       "id": "mtqzhe4l7hjtd",
-      "invoiceNo": "#000150",
+      "invoiceNo": "#000163",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3674,7 +3674,7 @@
     },
     {
       "id": "mtqzj8polk1is",
-      "invoiceNo": "#000151",
+      "invoiceNo": "#000164",
       "date": "2026-09-07",
       "customer": "aksith",
       "items": [
@@ -3692,7 +3692,7 @@
     },
     {
       "id": "mtqzoi5xvmw0m",
-      "invoiceNo": "#000152",
+      "invoiceNo": "#000165",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3710,7 +3710,7 @@
     },
     {
       "id": "mtqzpr3lsvopb",
-      "invoiceNo": "#000153",
+      "invoiceNo": "#000166",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3728,7 +3728,7 @@
     },
     {
       "id": "mtqzt7b5fpmln",
-      "invoiceNo": "#000154",
+      "invoiceNo": "#000167",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3746,7 +3746,7 @@
     },
     {
       "id": "mtqzxupwckw2s",
-      "invoiceNo": "#000155",
+      "invoiceNo": "#000168",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3764,7 +3764,7 @@
     },
     {
       "id": "mtqzyovj1jk2m",
-      "invoiceNo": "#000156",
+      "invoiceNo": "#000169",
       "date": "2026-09-07",
       "customer": "HARSHINI CREDIT",
       "items": [
@@ -3782,7 +3782,7 @@
     },
     {
       "id": "mtr02wev922im",
-      "invoiceNo": "#000157",
+      "invoiceNo": "#000170",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3808,7 +3808,7 @@
     },
     {
       "id": "mtr04pyyfszq4",
-      "invoiceNo": "#000158",
+      "invoiceNo": "#000171",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3834,7 +3834,7 @@
     },
     {
       "id": "mtr07ox07i2na",
-      "invoiceNo": "#000159",
+      "invoiceNo": "#000172",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3852,7 +3852,7 @@
     },
     {
       "id": "mtr0mk6l3yvne",
-      "invoiceNo": "#000160",
+      "invoiceNo": "#000173",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3870,7 +3870,7 @@
     },
     {
       "id": "mtr133vwryl82",
-      "invoiceNo": "#000161",
+      "invoiceNo": "#000174",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3896,7 +3896,7 @@
     },
     {
       "id": "mtr1p8zqvy54s",
-      "invoiceNo": "#000162",
+      "invoiceNo": "#000175",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3914,7 +3914,7 @@
     },
     {
       "id": "mtr27hp3rfqo0",
-      "invoiceNo": "#000163",
+      "invoiceNo": "#000176",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3932,7 +3932,7 @@
     },
     {
       "id": "mtr2fcsxvzod8",
-      "invoiceNo": "#000164",
+      "invoiceNo": "#000177",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3950,7 +3950,7 @@
     },
     {
       "id": "mtr2j5rus44nc",
-      "invoiceNo": "#000165",
+      "invoiceNo": "#000178",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -3968,7 +3968,7 @@
     },
     {
       "id": "mtr2px0bub6c3",
-      "invoiceNo": "#000166",
+      "invoiceNo": "#000179",
       "date": "2026-09-07",
       "customer": "mohawk",
       "items": [
@@ -3986,7 +3986,7 @@
     },
     {
       "id": "mtr2sw2yomzy5",
-      "invoiceNo": "#000167",
+      "invoiceNo": "#000180",
       "date": "2026-09-07",
       "customer": "Suhas (credit)",
       "items": [
@@ -4004,7 +4004,7 @@
     },
     {
       "id": "mtr3ackdlx50u",
-      "invoiceNo": "#000168",
+      "invoiceNo": "#000181",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -4022,7 +4022,7 @@
     },
     {
       "id": "mtr3upfneam34",
-      "invoiceNo": "#000169",
+      "invoiceNo": "#000182",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -4040,7 +4040,7 @@
     },
     {
       "id": "mtr3vo9sn6c9y",
-      "invoiceNo": "#000170",
+      "invoiceNo": "#000183",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -4058,7 +4058,7 @@
     },
     {
       "id": "mtr3vyik9c582",
-      "invoiceNo": "#000171",
+      "invoiceNo": "#000184",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -4076,7 +4076,7 @@
     },
     {
       "id": "mtr3y8ym8j490",
-      "invoiceNo": "#000172",
+      "invoiceNo": "#000185",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -4102,7 +4102,7 @@
     },
     {
       "id": "mtr3zyrjg21ux",
-      "invoiceNo": "#000173",
+      "invoiceNo": "#000186",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -4120,7 +4120,7 @@
     },
     {
       "id": "mtr48nen57dtu",
-      "invoiceNo": "#000174",
+      "invoiceNo": "#000187",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -4138,7 +4138,7 @@
     },
     {
       "id": "mtr14cd7qwj6z",
-      "invoiceNo": "#000176",
+      "invoiceNo": "#000188",
       "date": "2026-09-07",
       "customer": "shrine",
       "items": [
@@ -4156,7 +4156,7 @@
     },
     {
       "id": "mtr1f7ayabj35",
-      "invoiceNo": "#000177",
+      "invoiceNo": "#000189",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -4182,7 +4182,7 @@
     },
     {
       "id": "mtr1fu5dkslnb",
-      "invoiceNo": "#000179",
+      "invoiceNo": "#000190",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -4200,7 +4200,7 @@
     },
     {
       "id": "mtr1k5ys7m14s",
-      "invoiceNo": "#000181",
+      "invoiceNo": "#000191",
       "date": "2026-09-07",
       "customer": "Walk-in Customer",
       "items": [
@@ -4260,7 +4260,7 @@
       "creditAmt": 50,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000001 to Walk-in Customer",
+      "desc": "Sale - Invoice #000001 to Walk-in Customer [UPI]",
       "debitAmt": 50
     },
     {
@@ -4269,7 +4269,7 @@
       "creditAmt": 25,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000002 to Walk-in Customer",
+      "desc": "Sale - Invoice #000002 to Walk-in Customer [UPI]",
       "debitAmt": 25
     },
     {
@@ -4278,7 +4278,7 @@
       "creditAmt": 200,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000003 to Walk-in Customer",
+      "desc": "Sale - Invoice #000003 to Walk-in Customer [Cash]",
       "debitAmt": 200
     },
     {
@@ -4287,7 +4287,7 @@
       "creditAmt": 20,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000004 to Ahad",
+      "desc": "Sale - Invoice #000004 to Ahad [Cash]",
       "debitAmt": 20
     },
     {
@@ -4296,7 +4296,7 @@
       "creditAmt": 20,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000005 to Walk-in Customer",
+      "desc": "Sale - Invoice #000005 to Walk-in Customer [Cash]",
       "debitAmt": 20
     },
     {
@@ -4305,7 +4305,7 @@
       "creditAmt": 30,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000006 to Walk-in Customer",
+      "desc": "Sale - Invoice #000006 to Walk-in Customer [UPI]",
       "debitAmt": 30
     },
     {
@@ -4314,7 +4314,7 @@
       "creditAmt": 100,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000007 to Walk-in Customer",
+      "desc": "Sale - Invoice #000007 to Walk-in Customer [Cash]",
       "debitAmt": 100
     },
     {
@@ -4323,7 +4323,7 @@
       "creditAmt": 50,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000008 to Walk-in Customer",
+      "desc": "Sale - Invoice #000008 to Walk-in Customer [Cash]",
       "debitAmt": 50
     },
     {
@@ -4332,7 +4332,7 @@
       "creditAmt": 100,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000009 to Walk-in Customer",
+      "desc": "Sale - Invoice #000009 to Walk-in Customer [UPI]",
       "debitAmt": 100
     },
     {
@@ -4341,7 +4341,7 @@
       "creditAmt": 49,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000010 to Walk-in Customer",
+      "desc": "Sale - Invoice #000010 to Walk-in Customer [UPI]",
       "debitAmt": 49
     },
     {
@@ -4350,7 +4350,7 @@
       "creditAmt": 100,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000011 to Walk-in Customer",
+      "desc": "Sale - Invoice #000011 to Walk-in Customer [UPI]",
       "debitAmt": 100
     },
     {
@@ -4359,7 +4359,7 @@
       "creditAmt": 50,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000012 to Walk-in Customer",
+      "desc": "Sale - Invoice #000012 to Walk-in Customer [UPI]",
       "debitAmt": 50
     },
     {
@@ -4368,7 +4368,7 @@
       "creditAmt": 25,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000013 to Saalim",
+      "desc": "Sale - Invoice #000013 to Saalim [UPI]",
       "debitAmt": 25
     },
     {
@@ -4377,7 +4377,7 @@
       "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000014 to Walk-in Customer",
+      "desc": "Sale - Invoice #000014 to Walk-in Customer [Cash]",
       "debitAmt": 120
     },
     {
@@ -4386,7 +4386,7 @@
       "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000015 to Walk-in Customer",
+      "desc": "Sale - Invoice #000015 to Walk-in Customer [Cash]",
       "debitAmt": 120
     },
     {
@@ -4395,7 +4395,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000016 to Walk-in Customer",
+      "desc": "Sale - Invoice #000016 to Walk-in Customer [UPI]",
       "debitAmt": 60
     },
     {
@@ -4404,7 +4404,7 @@
       "creditAmt": 90,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000017 to Walk-in Customer",
+      "desc": "Sale - Invoice #000017 to Walk-in Customer [Cash]",
       "debitAmt": 90
     },
     {
@@ -4413,7 +4413,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000018 to Sanajana",
+      "desc": "Sale - Invoice #000018 to Sanajana [Cash]",
       "debitAmt": 60
     },
     {
@@ -4422,7 +4422,7 @@
       "creditAmt": 190,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000019 to Walk-in Customer",
+      "desc": "Sale - Invoice #000019 to Walk-in Customer [Cash]",
       "debitAmt": 190
     },
     {
@@ -4431,7 +4431,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000020 to Walk-in Customer",
+      "desc": "Sale - Invoice #000020 to Walk-in Customer [UPI]",
       "debitAmt": 60
     },
     {
@@ -4440,7 +4440,7 @@
       "creditAmt": 70,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000021 to Walk-in Customer",
+      "desc": "Sale - Invoice #000021 to Walk-in Customer [Cash]",
       "debitAmt": 70
     },
     {
@@ -4449,7 +4449,7 @@
       "creditAmt": 70,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000022 to Walk-in Customer",
+      "desc": "Sale - Invoice #000022 to Walk-in Customer [Cash]",
       "debitAmt": 70
     },
     {
@@ -4458,7 +4458,7 @@
       "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000023 to Walk-in Customer",
+      "desc": "Sale - Invoice #000023 to Walk-in Customer [Cash]",
       "debitAmt": 120
     },
     {
@@ -4467,7 +4467,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000024 to Walk-in Customer",
+      "desc": "Sale - Invoice #000024 to Walk-in Customer [Cash]",
       "debitAmt": 60
     },
     {
@@ -4476,7 +4476,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000025 to Sanajana",
+      "desc": "Sale - Invoice #000025 to Sanajana [Cash]",
       "debitAmt": 60
     },
     {
@@ -4485,7 +4485,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000026 to Walk-in Customer",
+      "desc": "Sale - Invoice #000026 to Walk-in Customer [Cash]",
       "debitAmt": 60
     },
     {
@@ -4494,7 +4494,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000027 to Walk-in Customer",
+      "desc": "Sale - Invoice #000027 to Walk-in Customer [Cash]",
       "debitAmt": 60
     },
     {
@@ -4503,7 +4503,7 @@
       "creditAmt": 180,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000028 to Walk-in Customer",
+      "desc": "Sale - Invoice #000028 to Walk-in Customer [UPI]",
       "debitAmt": 180
     },
     {
@@ -4512,7 +4512,7 @@
       "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000029 to Mohak",
+      "desc": "Sale - Invoice #000029 to Mohak [Cash]",
       "debitAmt": 120
     },
     {
@@ -4521,7 +4521,7 @@
       "creditAmt": 30,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000030 to Walk-in Customer",
+      "desc": "Sale - Invoice #000030 to Walk-in Customer [Cash]",
       "debitAmt": 30
     },
     {
@@ -4530,7 +4530,7 @@
       "creditAmt": 130,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000031 to Walk-in Customer",
+      "desc": "Sale - Invoice #000031 to Walk-in Customer [Cash]",
       "debitAmt": 130
     },
     {
@@ -4539,7 +4539,7 @@
       "creditAmt": 90,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000032 to Walk-in Customer",
+      "desc": "Sale - Invoice #000032 to Walk-in Customer [Cash]",
       "debitAmt": 90
     },
     {
@@ -4548,7 +4548,7 @@
       "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000033 to Walk-in Customer",
+      "desc": "Sale - Invoice #000033 to Walk-in Customer [UPI]",
       "debitAmt": 120
     },
     {
@@ -4557,7 +4557,7 @@
       "creditAmt": 70,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000034 to Walk-in Customer",
+      "desc": "Sale - Invoice #000034 to Walk-in Customer [Cash]",
       "debitAmt": 70
     },
     {
@@ -4566,7 +4566,7 @@
       "creditAmt": 30,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000035 to Walk-in Customer",
+      "desc": "Sale - Invoice #000035 to Walk-in Customer [Cash]",
       "debitAmt": 30
     },
     {
@@ -4575,7 +4575,7 @@
       "creditAmt": 140,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000036 to Walk-in Customer",
+      "desc": "Sale - Invoice #000036 to Walk-in Customer [UPI]",
       "debitAmt": 140
     },
     {
@@ -4584,7 +4584,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000037 to Walk-in Customer",
+      "desc": "Sale - Invoice #000037 to Walk-in Customer [UPI]",
       "debitAmt": 60
     },
     {
@@ -4593,7 +4593,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000038 to Sanjana ( irene)",
+      "desc": "Sale - Invoice #000038 to Sanjana ( irene) [UPI]",
       "debitAmt": 60
     },
     {
@@ -4602,7 +4602,7 @@
       "creditAmt": 70,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000039 to Walk-in Customer",
+      "desc": "Sale - Invoice #000039 to Walk-in Customer [UPI]",
       "debitAmt": 70
     },
     {
@@ -4611,7 +4611,7 @@
       "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000040 to Walk-in Customer",
+      "desc": "Sale - Invoice #000040 to Walk-in Customer [UPI]",
       "debitAmt": 120
     },
     {
@@ -4620,7 +4620,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000041 to Sanjana hershini",
+      "desc": "Sale - Invoice #000041 to Sanjana hershini [UPI]",
       "debitAmt": 60
     },
     {
@@ -4629,7 +4629,7 @@
       "creditAmt": 150,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000042 to Walk-in Customer",
+      "desc": "Sale - Invoice #000042 to Walk-in Customer [UPI]",
       "debitAmt": 150
     },
     {
@@ -4638,7 +4638,7 @@
       "creditAmt": 180,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000043 to Walk-in Customer",
+      "desc": "Sale - Invoice #000043 to Walk-in Customer [Cash]",
       "debitAmt": 180
     },
     {
@@ -4647,7 +4647,7 @@
       "creditAmt": 300,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000044 to Walk-in Customer",
+      "desc": "Sale - Invoice #000044 to Walk-in Customer [UPI]",
       "debitAmt": 300
     },
     {
@@ -4656,7 +4656,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000045 to Walk-in Customer",
+      "desc": "Sale - Invoice #000045 to Walk-in Customer [UPI]",
       "debitAmt": 60
     },
     {
@@ -4665,7 +4665,7 @@
       "creditAmt": 150,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000046 to Walk-in Customer",
+      "desc": "Sale - Invoice #000046 to Walk-in Customer [Cash]",
       "debitAmt": 150
     },
     {
@@ -4674,7 +4674,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000047 to Walk-in Customer",
+      "desc": "Sale - Invoice #000047 to Walk-in Customer [UPI]",
       "debitAmt": 60
     },
     {
@@ -4683,7 +4683,7 @@
       "creditAmt": 90,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000048 to Walk-in Customer",
+      "desc": "Sale - Invoice #000048 to Walk-in Customer [UPI]",
       "debitAmt": 90
     },
     {
@@ -4692,7 +4692,7 @@
       "creditAmt": 180,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000049 to Walk-in Customer",
+      "desc": "Sale - Invoice #000049 to Walk-in Customer [UPI]",
       "debitAmt": 180
     },
     {
@@ -4701,7 +4701,7 @@
       "creditAmt": 600,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000050 to Walk-in Customer",
+      "desc": "Sale - Invoice #000050 to Walk-in Customer [UPI]",
       "debitAmt": 600
     },
     {
@@ -4710,7 +4710,7 @@
       "creditAmt": 70,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000051 to Not paid",
+      "desc": "Sale - Invoice #000051 to Not paid [Cash]",
       "debitAmt": 70
     },
     {
@@ -4719,7 +4719,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000052 to Walk-in Customer",
+      "desc": "Sale - Invoice #000052 to Walk-in Customer [UPI]",
       "debitAmt": 60
     },
     {
@@ -4728,7 +4728,7 @@
       "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000053 to Walk-in Customer",
+      "desc": "Sale - Invoice #000053 to Walk-in Customer [UPI]",
       "debitAmt": 120
     },
     {
@@ -4737,7 +4737,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000054 to Walk-in Customer",
+      "desc": "Sale - Invoice #000054 to Walk-in Customer [UPI]",
       "debitAmt": 60
     },
     {
@@ -4746,7 +4746,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000055 to Walk-in Customer",
+      "desc": "Sale - Invoice #000055 to Walk-in Customer [Cash]",
       "debitAmt": 60
     },
     {
@@ -4755,7 +4755,7 @@
       "creditAmt": 70,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000056 to Walk-in Customer",
+      "desc": "Sale - Invoice #000056 to Walk-in Customer [UPI]",
       "debitAmt": 70
     },
     {
@@ -4764,7 +4764,7 @@
       "creditAmt": 240,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000057 to Walk-in Customer",
+      "desc": "Sale - Invoice #000057 to Walk-in Customer [Cash]",
       "debitAmt": 240
     },
     {
@@ -4773,7 +4773,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000058 to Walk-in Customer",
+      "desc": "Sale - Invoice #000058 to Walk-in Customer [UPI]",
       "debitAmt": 60
     },
     {
@@ -4782,7 +4782,7 @@
       "creditAmt": 70,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000059 to Walk-in Customer",
+      "desc": "Sale - Invoice #000059 to Walk-in Customer [UPI]",
       "debitAmt": 70
     },
     {
@@ -4791,7 +4791,7 @@
       "creditAmt": 70,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000060 to Walk-in Customer",
+      "desc": "Sale - Invoice #000060 to Walk-in Customer [UPI]",
       "debitAmt": 70
     },
     {
@@ -4800,7 +4800,7 @@
       "creditAmt": 140,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000061 to Walk-in Customer",
+      "desc": "Sale - Invoice #000061 to Walk-in Customer [Cash]",
       "debitAmt": 140
     },
     {
@@ -4809,7 +4809,7 @@
       "creditAmt": 70,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000062 to Walk-in Customer",
+      "desc": "Sale - Invoice #000062 to Walk-in Customer [Cash]",
       "debitAmt": 70
     },
     {
@@ -4818,7 +4818,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000063 to Walk-in Customer",
+      "desc": "Sale - Invoice #000063 to Walk-in Customer [Cash]",
       "debitAmt": 60
     },
     {
@@ -4827,7 +4827,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000064 to Walk-in Customer",
+      "desc": "Sale - Invoice #000064 to Walk-in Customer [Cash]",
       "debitAmt": 60
     },
     {
@@ -4836,7 +4836,7 @@
       "creditAmt": 520,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000065 to Walk-in Customer",
+      "desc": "Sale - Invoice #000065 to Walk-in Customer [Cash]",
       "debitAmt": 520
     },
     {
@@ -4845,7 +4845,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000066 to Walk-in Customer",
+      "desc": "Sale - Invoice #000066 to Walk-in Customer [UPI]",
       "debitAmt": 60
     },
     {
@@ -4854,7 +4854,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000067 to Walk-in Customer",
+      "desc": "Sale - Invoice #000067 to Walk-in Customer [Cash]",
       "debitAmt": 60
     },
     {
@@ -4863,7 +4863,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000068 to Saalim",
+      "desc": "Sale - Invoice #000068 to Saalim [Cash]",
       "debitAmt": 60
     },
     {
@@ -4872,7 +4872,7 @@
       "creditAmt": 70,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000069 to Walk-in Customer",
+      "desc": "Sale - Invoice #000069 to Walk-in Customer [UPI]",
       "debitAmt": 70
     },
     {
@@ -4881,7 +4881,7 @@
       "creditAmt": 140,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000070 to Walk-in Customer",
+      "desc": "Sale - Invoice #000070 to Walk-in Customer [Cash]",
       "debitAmt": 140
     },
     {
@@ -4890,7 +4890,7 @@
       "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000071 to Walk-in Customer",
+      "desc": "Sale - Invoice #000071 to Walk-in Customer [UPI]",
       "debitAmt": 120
     },
     {
@@ -4899,7 +4899,7 @@
       "creditAmt": 140,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000072 to Walk-in Customer",
+      "desc": "Sale - Invoice #000072 to Walk-in Customer [Cash]",
       "debitAmt": 140
     },
     {
@@ -4908,7 +4908,7 @@
       "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000073 to Walk-in Customer",
+      "desc": "Sale - Invoice #000073 to Walk-in Customer [UPI]",
       "debitAmt": 120
     },
     {
@@ -4917,7 +4917,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000074 to Walk-in Customer",
+      "desc": "Sale - Invoice #000074 to Walk-in Customer [UPI]",
       "debitAmt": 60
     },
     {
@@ -4926,7 +4926,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000075 to Walk-in Customer",
+      "desc": "Sale - Invoice #000075 to Walk-in Customer [Cash]",
       "debitAmt": 60
     },
     {
@@ -4935,7 +4935,7 @@
       "creditAmt": 30,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000076 to Walk-in Customer",
+      "desc": "Sale - Invoice #000076 to Walk-in Customer [Cash]",
       "debitAmt": 30
     },
     {
@@ -4944,7 +4944,7 @@
       "creditAmt": 50,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000077 to Walk-in Customer",
+      "desc": "Sale - Invoice #000077 to Walk-in Customer [Cash]",
       "debitAmt": 50
     },
     {
@@ -4953,7 +4953,7 @@
       "creditAmt": 50,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000078 to Walk-in Customer",
+      "desc": "Sale - Invoice #000078 to Walk-in Customer [Cash]",
       "debitAmt": 50
     },
     {
@@ -4962,7 +4962,7 @@
       "creditAmt": 130,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000079 to Walk-in Customer",
+      "desc": "Sale - Invoice #000079 to Walk-in Customer [UPI]",
       "debitAmt": 130
     },
     {
@@ -4971,7 +4971,7 @@
       "creditAmt": 50,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000080 to Walk-in Customer",
+      "desc": "Sale - Invoice #000080 to Walk-in Customer [Cash]",
       "debitAmt": 50
     },
     {
@@ -4980,7 +4980,7 @@
       "creditAmt": 30,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000081 to Walk-in Customer",
+      "desc": "Sale - Invoice #000081 to Walk-in Customer [Cash]",
       "debitAmt": 30
     },
     {
@@ -4989,7 +4989,7 @@
       "creditAmt": 100,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000082 to Walk-in Customer",
+      "desc": "Sale - Invoice #000082 to Walk-in Customer [Cash]",
       "debitAmt": 100
     },
     {
@@ -4998,7 +4998,7 @@
       "creditAmt": 100,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000083 to Walk-in Customer",
+      "desc": "Sale - Invoice #000083 to Walk-in Customer [Cash]",
       "debitAmt": 100
     },
     {
@@ -5007,7 +5007,7 @@
       "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000084 to Walk-in Customer",
+      "desc": "Sale - Invoice #000084 to Walk-in Customer [Cash]",
       "debitAmt": 120
     },
     {
@@ -5016,7 +5016,7 @@
       "creditAmt": 100,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000085 to Walk-in Customer",
+      "desc": "Sale - Invoice #000085 to Walk-in Customer [Cash]",
       "debitAmt": 100
     },
     {
@@ -5025,7 +5025,7 @@
       "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000086 to Manan",
+      "desc": "Sale - Invoice #000086 to Manan [Cash]",
       "debitAmt": 120
     },
     {
@@ -5034,7 +5034,7 @@
       "creditAmt": 300,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000087 to Walk-in Customer",
+      "desc": "Sale - Invoice #000087 to Walk-in Customer [UPI]",
       "debitAmt": 300
     },
     {
@@ -5043,17 +5043,17 @@
       "creditAmt": 110,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000088 to Walk-in Customer",
+      "desc": "Sale - Invoice #000088 to Walk-in Customer [Cash]",
       "debitAmt": 110
     },
     {
       "id": "j_mtqw4kz4215gv",
       "creditAcc": "Sales",
-      "creditAmt": 601,
+      "creditAmt": 180,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000089 to Walk-in Customer",
-      "debitAmt": 601
+      "desc": "Sale - Invoice #000183 to Walk-in Customer [Cash]",
+      "debitAmt": 180
     },
     {
       "id": "j_mtqw2r5x8fb07",
@@ -5079,7 +5079,7 @@
       "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000092 to Walk-in Customer",
+      "desc": "Sale - Invoice #000190 to Walk-in Customer [UPI]",
       "debitAmt": 60
     },
     {
@@ -5097,7 +5097,7 @@
       "creditAmt": 100,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000094 to Walk-in Customer",
+      "desc": "Sale - Invoice #000092 to Walk-in Customer [Cash]",
       "debitAmt": 100
     },
     {
@@ -5121,11 +5121,11 @@
     {
       "id": "j_mtqwiiduhu8xd",
       "creditAcc": "Sales",
-      "creditAmt": 70,
+      "creditAmt": 100,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000097 to Walk-in Customer",
-      "debitAmt": 70
+      "desc": "Sale - Invoice #000189 to Walk-in Customer [Cash]",
+      "debitAmt": 100
     },
     {
       "id": "j_mtqwl1d29no8f",
@@ -5139,20 +5139,20 @@
     {
       "id": "j_mtqwpddym9jjl",
       "creditAcc": "Sales",
-      "creditAmt": 100,
+      "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000099 to Walk-in Customer",
-      "debitAmt": 100
+      "desc": "Sale - Invoice #000175 to Walk-in Customer [UPI]",
+      "debitAmt": 120
     },
     {
       "id": "j_mtqwng6v2lmnx",
       "creditAcc": "Sales",
-      "creditAmt": 100,
+      "creditAmt": 50,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000100 to Walk-in Customer",
-      "debitAmt": 100
+      "desc": "Sale - Invoice #000180 to Suhas (credit) [Cash]",
+      "debitAmt": 50
     },
     {
       "id": "j_mtqwqq8eoos8x",
@@ -5166,11 +5166,11 @@
     {
       "id": "j_mtqwsp6mtjs9h",
       "creditAcc": "Sales",
-      "creditAmt": 60,
+      "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000102 to Walk-in Customer",
-      "debitAmt": 60
+      "desc": "Sale - Invoice #000187 to Walk-in Customer [UPI]",
+      "debitAmt": 120
     },
     {
       "id": "j_mtqwu0xzaet7j",
@@ -5178,7 +5178,7 @@
       "creditAmt": 310,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000103 to Walk-in Customer",
+      "desc": "Sale - Invoice #000100 to Walk-in Customer [UPI]",
       "debitAmt": 310
     },
     {
@@ -5196,7 +5196,7 @@
       "creditAmt": 150,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000105 to Walk-in Customer",
+      "desc": "Sale - Invoice #000102 to Walk-in Customer [Cash]",
       "debitAmt": 150
     },
     {
@@ -5211,11 +5211,11 @@
     {
       "id": "j_mtqx110fesggu",
       "creditAcc": "Sales",
-      "creditAmt": 90,
+      "creditAmt": 60,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000107 to Walk-in Customer",
-      "debitAmt": 90
+      "desc": "Sale - Invoice #000182 to Walk-in Customer [Cash]",
+      "debitAmt": 60
     },
     {
       "id": "j_mtqwxger39c5p",
@@ -5229,11 +5229,11 @@
     {
       "id": "j_mtqwy7hpvj06f",
       "creditAcc": "Sales",
-      "creditAmt": 300,
+      "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000109 to Walk-in Customer",
-      "debitAmt": 300
+      "desc": "Sale - Invoice #000185 to Walk-in Customer [Cash]",
+      "debitAmt": 120
     },
     {
       "id": "j_mtqx393z28jgc",
@@ -5268,7 +5268,7 @@
       "creditAmt": 100,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000113 to Walk-in Customer",
+      "desc": "Sale - Invoice #000107 to Walk-in Customer [Cash]",
       "debitAmt": 100
     },
     {
@@ -5277,7 +5277,7 @@
       "creditAmt": 50,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000114 to Walk-in Customer",
+      "desc": "Sale - Invoice #000109 to Walk-in Customer [Cash]",
       "debitAmt": 50
     },
     {
@@ -5292,20 +5292,20 @@
     {
       "id": "j_mtqxb6ynm1ctu",
       "creditAcc": "Sales",
-      "creditAmt": 50,
+      "creditAmt": 150,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000116 to shrine",
-      "debitAmt": 50
+      "desc": "Sale - Invoice #000191 to Walk-in Customer [UPI]",
+      "debitAmt": 150
     },
     {
       "id": "j_mtqxbldn06cvf",
       "creditAcc": "Sales",
-      "creditAmt": 70,
+      "creditAmt": 50,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000117 to Walk-in Customer",
-      "debitAmt": 70
+      "desc": "Sale - Invoice #000178 to Walk-in Customer [Cash]",
+      "debitAmt": 50
     },
     {
       "id": "j_mtqxccect95p9",
@@ -5322,7 +5322,7 @@
       "creditAmt": 70,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000119 to sanajana",
+      "desc": "Sale - Invoice #000116 to sanajana [Cash]",
       "debitAmt": 70
     },
     {
@@ -5337,20 +5337,20 @@
     {
       "id": "j_mtqxhfl3hfedt",
       "creditAcc": "Sales",
-      "creditAmt": 60,
+      "creditAmt": 140,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000121 to Tanmay",
-      "debitAmt": 60
+      "desc": "Sale - Invoice #000184 to Walk-in Customer [Cash]",
+      "debitAmt": 140
     },
     {
       "id": "j_mtqxl2m8bofvy",
       "creditAcc": "Sales",
-      "creditAmt": 190,
+      "creditAmt": 120,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000122 to tanmay",
-      "debitAmt": 190
+      "desc": "Sale - Invoice #000186 to Walk-in Customer [Cash]",
+      "debitAmt": 120
     },
     {
       "id": "j_mtqxm2c6vhcd9",
@@ -5364,11 +5364,11 @@
     {
       "id": "j_mtqxmcat2tq7v",
       "creditAcc": "Sales",
-      "creditAmt": 30,
+      "creditAmt": 70,
       "debitAcc": "Cash",
       "date": "2026-09-07",
-      "desc": "Sale - Invoice #000124 to Walk-in Customer",
-      "debitAmt": 30
+      "desc": "Sale - Invoice #000188 to shrine [Cash]",
+      "debitAmt": 70
     },
     {
       "id": "j_mtqxqzim41ipo",
@@ -5821,15 +5821,6 @@
       "debitAmt": 190
     },
     {
-      "id": "j_mtr1p8zqvy54s",
-      "creditAcc": "Sales",
-      "creditAmt": 120,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000175 to Walk-in Customer",
-      "debitAmt": 120
-    },
-    {
       "id": "j_mtr14cd7qwj6z",
       "creditAcc": "Sales",
       "creditAmt": 70,
@@ -5848,15 +5839,6 @@
       "debitAmt": 100
     },
     {
-      "id": "j_mtr27hp3rfqo0",
-      "creditAcc": "Sales",
-      "creditAmt": 60,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000178 to Walk-in Customer",
-      "debitAmt": 60
-    },
-    {
       "id": "j_mtr1fu5dkslnb",
       "creditAcc": "Sales",
       "creditAmt": 60,
@@ -5866,15 +5848,6 @@
       "debitAmt": 60
     },
     {
-      "id": "j_mtr2fcsxvzod8",
-      "creditAcc": "Sales",
-      "creditAmt": 150,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000180 to Walk-in Customer",
-      "debitAmt": 150
-    },
-    {
       "id": "j_mtr1k5ys7m14s",
       "creditAcc": "Sales",
       "creditAmt": 150,
@@ -5882,96 +5855,6 @@
       "date": "2026-09-07",
       "desc": "Sale - Invoice #000181 to Walk-in Customer",
       "debitAmt": 150
-    },
-    {
-      "id": "j_mtr2j5rus44nc",
-      "creditAcc": "Sales",
-      "creditAmt": 50,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000182 to Walk-in Customer",
-      "debitAmt": 50
-    },
-    {
-      "id": "j_mtr2px0bub6c3",
-      "creditAcc": "Sales",
-      "creditAmt": 100,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000183 to mohawk",
-      "debitAmt": 100
-    },
-    {
-      "id": "j_mtr2sw2yomzy5",
-      "creditAcc": "Sales",
-      "creditAmt": 50,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000184 to Suhas (credit)",
-      "debitAmt": 50
-    },
-    {
-      "id": "j_mtr3ackdlx50u",
-      "creditAcc": "Sales",
-      "creditAmt": 30,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000185 to Walk-in Customer",
-      "debitAmt": 30
-    },
-    {
-      "id": "j_mtr3upfneam34",
-      "creditAcc": "Sales",
-      "creditAmt": 60,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000186 to Walk-in Customer",
-      "debitAmt": 60
-    },
-    {
-      "id": "j_mtr3vo9sn6c9y",
-      "creditAcc": "Sales",
-      "creditAmt": 180,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000187 to Walk-in Customer",
-      "debitAmt": 180
-    },
-    {
-      "id": "j_mtr3vyik9c582",
-      "creditAcc": "Sales",
-      "creditAmt": 140,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000188 to Walk-in Customer",
-      "debitAmt": 140
-    },
-    {
-      "id": "j_mtr3y8ym8j490",
-      "creditAcc": "Sales",
-      "creditAmt": 120,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000189 to Walk-in Customer",
-      "debitAmt": 120
-    },
-    {
-      "id": "j_mtr3zyrjg21ux",
-      "creditAcc": "Sales",
-      "creditAmt": 120,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000190 to Walk-in Customer",
-      "debitAmt": 120
-    },
-    {
-      "id": "j_mtr48nen57dtu",
-      "creditAcc": "Sales",
-      "creditAmt": 120,
-      "debitAcc": "Cash",
-      "date": "2026-09-07",
-      "desc": "Sale - Invoice #000191 to Walk-in Customer",
-      "debitAmt": 120
     }
   ],
   "nextInvoice": 192
