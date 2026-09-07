@@ -22,6 +22,38 @@ function uid() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 }
 
+function normalizeAccountName(acc) {
+    if (!acc) return '';
+    const clean = String(acc).trim();
+    const lower = clean.toLowerCase();
+
+    if (lower === 'cash' || lower === 'cash a/c' || lower === 'cash account' || lower === 'cash in hand') return 'Cash A/c';
+    if (lower === 'bank' || lower === 'bank a/c' || lower === 'bank account' || lower === 'upi' || lower === 'upi payment') return 'Bank A/c';
+    if (lower === 'sales' || lower === 'sales a/c' || lower === 'sales revenue' || lower === 'sales income') return 'Sales A/c';
+    if (lower === 'capital' || lower === 'capital a/c' || lower === 'equity') return 'Capital A/c';
+
+    return clean;
+}
+
+const assetKeywords = ['cash', 'bank', 'receivable', 'debtor', 'inventory', 'stock', 'equipment', 'machinery', 'building', 'land', 'furniture', 'fixtures', 'vehicle', 'asset', 'prepaid', 'investment'];
+const equityKeywords = ['capital', 'equity', 'drawing', 'drawings', 'share capital', 'retained earnings'];
+const incomeKeywords = ['sales', 'revenue', 'income', 'gain', 'interest received', 'commission received', 'discount received'];
+const liabilityKeywords = ['payable', 'creditor', 'creditors', 'loan', 'borrowing', 'overdraft', 'liability', 'liabilities', 'duty', 'duties', 'tax payable', 'outstanding', 'unearned'];
+
+function classifyAccount(accName) {
+    if (!accName) return 'expense';
+    const norm = normalizeAccountName(accName);
+    const lower = norm.toLowerCase();
+
+    if (equityKeywords.some(k => lower.includes(k))) return 'equity';
+    if (incomeKeywords.some(k => lower.includes(k))) return 'income';
+    if (liabilityKeywords.some(k => lower.includes(k))) return 'liability';
+    if (assetKeywords.some(k => lower.includes(k))) return 'asset';
+
+    // In business accounting, any debit account that is not Asset, Liability, Equity, or Income is an EXPENSE!
+    return 'expense';
+}
+
 function parseInvoiceNumber(invNo) {
     if (!invNo) return 0;
     const match = String(invNo).match(/\d+/);
@@ -39,6 +71,35 @@ function sortPOSBills(bills, ascending = true) {
         const dateA = a.date || '';
         const dateB = b.date || '';
         return ascending ? dateA.localeCompare(dateB) : dateB.localeCompare(dateA);
+    });
+}
+
+function sortJournalEntries(journalList, ascending = false) {
+    if (!Array.isArray(journalList)) return [];
+    return journalList.slice().sort((a, b) => {
+        const numA = parseInvoiceNumber(a ? (a.desc || a.invoiceNo || a.id || '') : '');
+        const numB = parseInvoiceNumber(b ? (b.desc || b.invoiceNo || b.id || '') : '');
+
+        if (numA > 0 && numB > 0 && numA !== numB) {
+            return ascending ? (numA - numB) : (numB - numA);
+        }
+
+        const dateA = (a && a.date) ? a.date : '';
+        const dateB = (b && b.date) ? b.date : '';
+        if (dateA !== dateB) {
+            return ascending ? dateA.localeCompare(dateB) : dateB.localeCompare(dateA);
+        }
+
+        const timeA = (a && (a.time || a.createdAt)) ? (a.time || a.createdAt) : '';
+        const timeB = (b && (b.time || b.createdAt)) ? (b.time || b.createdAt) : '';
+        if (timeA && timeB && timeA !== timeB) {
+            return ascending ? timeA.localeCompare(timeB) : timeB.localeCompare(timeA);
+        }
+
+        if (numA > 0 && numB === 0) return ascending ? -1 : 1;
+        if (numB > 0 && numA === 0) return ascending ? 1 : -1;
+
+        return 0;
     });
 }
 
@@ -337,15 +398,13 @@ const pageTitles = {
 // DASHBOARD
 // =============================================
 function initDashboard() {
-    const expenseKeywords = ['rent', 'salary', 'salaries', 'wages', 'expense', 'utilities', 'electricity', 'purchase', 'purchases', 'cost', 'loss', 'depreciation', 'freight', 'carriage', 'advertising', 'stationery', 'telephone', 'water', 'tax', 'discount allowed'];
-
     // Cash balance from journal (Cash and Bank accounts)
     let cashBalance = 0;
     appData.journal.forEach(e => {
-        const d = (e.debitAcc || '').toLowerCase();
-        const c = (e.creditAcc || '').toLowerCase();
-        if (d.includes('cash') || d.includes('bank')) cashBalance += parseFloat(e.debitAmt) || 0;
-        if (c.includes('cash') || c.includes('bank')) cashBalance -= parseFloat(e.creditAmt) || 0;
+        const d = normalizeAccountName(e.debitAcc);
+        const c = normalizeAccountName(e.creditAcc);
+        if (d === 'Cash A/c' || d === 'Bank A/c') cashBalance += parseFloat(e.debitAmt) || 0;
+        if (c === 'Cash A/c' || c === 'Bank A/c') cashBalance -= parseFloat(e.creditAmt) || 0;
     });
 
     const cashEl = document.getElementById('dash-cash-balance');
@@ -357,12 +416,10 @@ function initDashboard() {
     // Total expenses (debit entries for expense accounts)
     let expenses = 0;
     appData.journal.forEach(e => {
-        const d = (e.debitAcc || '').toLowerCase();
-        const c = (e.creditAcc || '').toLowerCase();
-        if (expenseKeywords.some(k => d.includes(k))) {
+        if (classifyAccount(e.debitAcc) === 'expense') {
             expenses += parseFloat(e.debitAmt) || 0;
         }
-        if (expenseKeywords.some(k => c.includes(k))) {
+        if (classifyAccount(e.creditAcc) === 'expense') {
             expenses -= parseFloat(e.creditAmt) || 0;
         }
     });
@@ -1403,12 +1460,13 @@ async function resequenceAllInvoices() {
 
     appData.pos = sortedBills;
     appData.nextInvoice = sortedBills.length + 1;
-    appData.journal = deduplicateJournal(appData.journal);
+    appData.journal = sortJournalEntries(deduplicateJournal(appData.journal), false);
 
     saveLocal();
     await syncData();
 
     initBillHistory();
+    renderJournalTable();
     alert(`✓ Successfully resequenced all ${sortedBills.length} invoices (#000001 to #${String(sortedBills.length).padStart(6, '0')}) and synchronized!`);
 }
 
@@ -1417,6 +1475,13 @@ async function resequenceAllInvoices() {
 // =============================================
 function initJournal() {
     renderJournalTable();
+
+    const searchInput = document.getElementById('journal-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            renderJournalTable(searchInput.value.trim().toLowerCase());
+        });
+    }
 
     if (!journalListenersAttached) {
         journalListenersAttached = true;
@@ -1511,20 +1576,34 @@ function initJournal() {
     }
 }
 
-function renderJournalTable() {
+function renderJournalTable(query = '') {
     const tbody = document.querySelector('#journal-table tbody');
     if (!tbody) return;
-    if (appData.journal.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-secondary);">No journal entries yet.</td></tr>';
+
+    let sorted = sortJournalEntries(appData.journal, false);
+
+    if (query) {
+        sorted = sorted.filter(e => {
+            const text = `${e.date || ''} ${e.debitAcc || ''} ${e.creditAcc || ''} ${e.desc || ''} ${e.debitAmt || ''} ${e.creditAmt || ''}`.toLowerCase();
+            return text.includes(query);
+        });
+    }
+
+    if (sorted.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--text-secondary);">${query ? 'No matching journal entries found.' : 'No journal entries yet.'}</td></tr>`;
         return;
     }
-    tbody.innerHTML = [...appData.journal].reverse().map(e => {
+
+    tbody.innerHTML = sorted.map(e => {
         const timeStr = e.time || (e.createdAt ? new Date(e.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }) : '');
         const dateDisplay = `${e.date || ''}${timeStr ? `<span style="font-size:0.75rem;color:var(--text-secondary);display:block;">${timeStr}</span>` : ''}`;
+        const debitNorm = normalizeAccountName(e.debitAcc);
+        const creditNorm = normalizeAccountName(e.creditAcc);
+
         return `
             <tr>
                 <td>${dateDisplay}</td>
-                <td>${e.debitAcc || ''} / ${e.creditAcc || ''}</td>
+                <td>${debitNorm || ''} / ${creditNorm || ''}</td>
                 <td>${e.desc || ''}</td>
                 <td>${e.debitAmt ? fmt(e.debitAmt) : '—'}</td>
                 <td>${e.creditAmt ? fmt(e.creditAmt) : '—'}</td>
@@ -1540,7 +1619,8 @@ function renderJournalTable() {
 function exportJournalCSV() {
     if (appData.journal.length === 0) { alert('No entries to export.'); return; }
     const header = 'Date,Description,Debit Account,Debit Amount,Credit Account,Credit Amount\n';
-    const rows = appData.journal.map(e => [e.date, e.desc, e.debitAcc, e.debitAmt, e.creditAcc, e.creditAmt].join(',')).join('\n');
+    const sorted = sortJournalEntries(appData.journal, false);
+    const rows = sorted.map(e => [e.date, `"${(e.desc || '').replace(/"/g, '""')}"`, normalizeAccountName(e.debitAcc), e.debitAmt, normalizeAccountName(e.creditAcc), e.creditAmt].join(',')).join('\n');
     const blob = new Blob([header + rows], { type: 'text/csv' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -1555,11 +1635,11 @@ function initLedger() {
     const select = document.getElementById('ledger-acc-select');
     if (!select) return;
 
-    // Get all unique accounts from journal
+    // Get all unique normalized accounts from journal
     const accounts = new Set();
     appData.journal.forEach(e => {
-        if (e.debitAcc) accounts.add(e.debitAcc);
-        if (e.creditAcc) accounts.add(e.creditAcc);
+        if (e.debitAcc) accounts.add(normalizeAccountName(e.debitAcc));
+        if (e.creditAcc) accounts.add(normalizeAccountName(e.creditAcc));
     });
 
     select.innerHTML = '<option value="">Select Account...</option>';
@@ -1584,7 +1664,8 @@ function renderLedger(account) {
         return;
     }
 
-    const entries = appData.journal.filter(e => e.debitAcc === account || e.creditAcc === account);
+    const normAccount = normalizeAccountName(account);
+    const entries = appData.journal.filter(e => normalizeAccountName(e.debitAcc) === normAccount || normalizeAccountName(e.creditAcc) === normAccount);
     entries.sort((a, b) => (a.date || '').localeCompare(b.date || ''));
 
     if (entries.length === 0) {
@@ -1595,19 +1676,21 @@ function renderLedger(account) {
     let balance = 0;
     tbody.innerHTML = entries.map(e => {
         let debit = 0, credit = 0, particulars = '';
-        if (e.debitAcc === account) {
+        if (normalizeAccountName(e.debitAcc) === normAccount) {
             debit = parseFloat(e.debitAmt) || 0;
-            particulars = `By ${e.creditAcc}`;
+            particulars = `By ${normalizeAccountName(e.creditAcc)}`;
         }
-        if (e.creditAcc === account) {
+        if (normalizeAccountName(e.creditAcc) === normAccount) {
             credit = parseFloat(e.creditAmt) || 0;
-            particulars = `To ${e.debitAcc}`;
+            particulars = `To ${normalizeAccountName(e.debitAcc)}`;
         }
         balance += debit - credit;
         const balStr = (balance >= 0 ? '' : '-') + '₹ ' + Math.abs(balance).toFixed(2) + (balance >= 0 ? ' Dr' : ' Cr');
+        const timeStr = e.time || (e.createdAt ? new Date(e.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }) : '');
+        const dateDisplay = `${e.date || ''}${timeStr ? `<span style="font-size:0.75rem;color:var(--text-secondary);display:block;">${timeStr}</span>` : ''}`;
         return `
             <tr>
-                <td>${e.date || ''}</td>
+                <td>${dateDisplay}</td>
                 <td>${e.desc || ''}<br><small style="color:var(--text-secondary);">${particulars}</small></td>
                 <td>${debit ? fmt(debit) : '—'}</td>
                 <td>${credit ? fmt(credit) : '—'}</td>
@@ -1623,13 +1706,15 @@ function renderLedger(account) {
 function initTrialBalance() {
     const accounts = {};
     appData.journal.forEach(e => {
-        if (e.debitAcc) {
-            if (!accounts[e.debitAcc]) accounts[e.debitAcc] = { debit: 0, credit: 0 };
-            accounts[e.debitAcc].debit += parseFloat(e.debitAmt) || 0;
+        const dAcc = normalizeAccountName(e.debitAcc);
+        const cAcc = normalizeAccountName(e.creditAcc);
+        if (dAcc) {
+            if (!accounts[dAcc]) accounts[dAcc] = { debit: 0, credit: 0 };
+            accounts[dAcc].debit += parseFloat(e.debitAmt) || 0;
         }
-        if (e.creditAcc) {
-            if (!accounts[e.creditAcc]) accounts[e.creditAcc] = { debit: 0, credit: 0 };
-            accounts[e.creditAcc].credit += parseFloat(e.creditAmt) || 0;
+        if (cAcc) {
+            if (!accounts[cAcc]) accounts[cAcc] = { debit: 0, credit: 0 };
+            accounts[cAcc].credit += parseFloat(e.creditAmt) || 0;
         }
     });
 
@@ -1644,7 +1729,6 @@ function initTrialBalance() {
     } else {
         tbody.innerHTML = names.map(acc => {
             const { debit, credit } = accounts[acc];
-            // Net: show debit balance or credit balance
             const netDebit = Math.max(0, debit - credit);
             const netCredit = Math.max(0, credit - debit);
             totalDebit += netDebit;
@@ -1671,13 +1755,13 @@ function initTrialBalance() {
 function initCashBook() {
     const cashEntries = [];
     appData.journal.forEach(e => {
-        const d = (e.debitAcc || '').toLowerCase();
-        const c = (e.creditAcc || '').toLowerCase();
-        if (d.includes('cash')) {
-            cashEntries.push({ date: e.date, particulars: e.desc + ` (from ${e.creditAcc})`, receipts: parseFloat(e.debitAmt) || 0, payments: 0 });
+        const d = normalizeAccountName(e.debitAcc);
+        const c = normalizeAccountName(e.creditAcc);
+        if (d === 'Cash A/c') {
+            cashEntries.push({ date: e.date, time: e.time, particulars: e.desc + ` (from ${c})`, receipts: parseFloat(e.debitAmt) || 0, payments: 0 });
         }
-        if (c.includes('cash')) {
-            cashEntries.push({ date: e.date, particulars: e.desc + ` (to ${e.debitAcc})`, receipts: 0, payments: parseFloat(e.creditAmt) || 0 });
+        if (c === 'Cash A/c') {
+            cashEntries.push({ date: e.date, time: e.time, particulars: e.desc + ` (to ${d})`, receipts: 0, payments: parseFloat(e.creditAmt) || 0 });
         }
     });
     cashEntries.sort((a, b) => (a.date || '').localeCompare(b.date || ''));
@@ -1694,9 +1778,10 @@ function initCashBook() {
     tbody.innerHTML = cashEntries.map(entry => {
         balance += entry.receipts - entry.payments;
         const balStr = (balance >= 0 ? '₹ ' : '-₹ ') + Math.abs(balance).toFixed(2);
+        const timeStr = entry.time ? `<span style="font-size:0.75rem;color:var(--text-secondary);display:block;">${entry.time}</span>` : '';
         return `
             <tr>
-                <td>${entry.date || ''}</td>
+                <td>${entry.date || ''}${timeStr}</td>
                 <td>${entry.particulars}</td>
                 <td style="color:var(--success);">${entry.receipts ? fmt(entry.receipts) : '—'}</td>
                 <td style="color:var(--danger);">${entry.payments ? fmt(entry.payments) : '—'}</td>
@@ -1713,32 +1798,17 @@ function initFinancialStatements() {
     // 1. Calculate trial balances for all accounts
     const accounts = {};
     appData.journal.forEach(e => {
-        if (e.debitAcc) {
-            if (!accounts[e.debitAcc]) accounts[e.debitAcc] = { debit: 0, credit: 0 };
-            accounts[e.debitAcc].debit += parseFloat(e.debitAmt) || 0;
+        const dAcc = normalizeAccountName(e.debitAcc);
+        const cAcc = normalizeAccountName(e.creditAcc);
+        if (dAcc) {
+            if (!accounts[dAcc]) accounts[dAcc] = { debit: 0, credit: 0 };
+            accounts[dAcc].debit += parseFloat(e.debitAmt) || 0;
         }
-        if (e.creditAcc) {
-            if (!accounts[e.creditAcc]) accounts[e.creditAcc] = { debit: 0, credit: 0 };
-            accounts[e.creditAcc].credit += parseFloat(e.creditAmt) || 0;
+        if (cAcc) {
+            if (!accounts[cAcc]) accounts[cAcc] = { debit: 0, credit: 0 };
+            accounts[cAcc].credit += parseFloat(e.creditAmt) || 0;
         }
     });
-
-    // Account Keyword Dictionaries
-    const incomeKeywords = ['sales', 'revenue', 'income', 'gain', 'interest received', 'commission received', 'discount received'];
-    const expenseKeywords = ['rent', 'salary', 'salaries', 'wages', 'expense', 'utilities', 'electricity', 'purchase', 'purchases', 'cost', 'loss', 'depreciation', 'freight', 'carriage', 'advertising', 'stationery', 'telephone', 'water', 'tax', 'discount allowed'];
-    const equityKeywords = ['capital', 'equity', 'drawing', 'drawings', 'share capital', 'retained earnings'];
-    const liabilityKeywords = ['payable', 'creditor', 'creditors', 'loan', 'borrowing', 'overdraft', 'liability', 'liabilities', 'duty', 'duties', 'tax payable', 'outstanding', 'unearned'];
-    const assetKeywords = ['cash', 'bank', 'receivable', 'debtor', 'debtors', 'inventory', 'stock', 'equipment', 'machinery', 'building', 'land', 'furniture', 'fixtures', 'vehicle', 'asset', 'prepaid', 'investment'];
-
-    function classifyAccount(accName) {
-        const lower = accName.toLowerCase();
-        if (equityKeywords.some(k => lower.includes(k))) return 'equity';
-        if (incomeKeywords.some(k => lower.includes(k))) return 'income';
-        if (expenseKeywords.some(k => lower.includes(k))) return 'expense';
-        if (liabilityKeywords.some(k => lower.includes(k))) return 'liability';
-        if (assetKeywords.some(k => lower.includes(k))) return 'asset';
-        return 'unclassified';
-    }
 
     let totalIncome = 0;
     let totalExpenses = 0;
@@ -1781,15 +1851,6 @@ function initFinancialStatements() {
             if (amt !== 0) {
                 totalAssets += amt;
                 bsAssetRows.push({ label: acc, amount: amt });
-            }
-        } else {
-            // Unclassified: default based on normal balance
-            if (netDebit > 0) {
-                totalAssets += netDebit;
-                bsAssetRows.push({ label: acc, amount: netDebit });
-            } else if (netCredit > 0) {
-                totalLiabilities += netCredit;
-                bsLiabilityRows.push({ label: acc, amount: netCredit });
             }
         }
     });

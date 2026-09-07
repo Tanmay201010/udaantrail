@@ -477,7 +477,8 @@
       <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
             <h2>Journal Entries</h2>
-            <div style="display: flex; gap: 0.5rem;">
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+                <input type="text" id="journal-search" placeholder="🔍 Search account, invoice, desc…" autocomplete="off" style="padding:0.5rem 0.75rem; background:var(--bg-primary); border:1px solid var(--border); border-radius:var(--radius-md); color:var(--text-primary); font-family:inherit; font-size:14px; min-width:220px;">
                 <button id="export-journal-btn" class="btn btn-secondary"><i data-lucide="download"></i> Export Excel</button>
                 <button id="new-journal-btn" class="btn btn-primary"><i data-lucide="plus"></i> New Entry</button>
             </div>
@@ -640,7 +641,7 @@
     </div>
   </template>
 
-  <script type="module" src="app.js?v=21"></script>
+  <script type="module" src="app.js?v=22"></script>
 </body>
 </html>
 
