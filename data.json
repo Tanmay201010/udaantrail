@@ -228,7 +228,7 @@
       "id": "mtrjv9kcbvqoh",
       "name": "hulullu chocolate",
       "consignor": "",
-      "qty": 6,
+      "qty": 7,
       "price": 9999
     }
   ],
@@ -4506,12 +4506,12 @@
       "note": "UPI"
     },
     {
-      "id": "mtrjx33un9ngu",
+      "id": "mtrjx3y7snn7t",
       "invoiceNo": "#000192",
       "date": "2026-09-07",
       "time": "11:35 PM",
-      "createdAt": "2026-09-07T18:05:40.985Z",
-      "customer": "ahad",
+      "createdAt": "2026-09-07T18:05:42.076Z",
+      "customer": "Walk-in Customer",
       "items": [
         {
           "id": "mtrjv9kcbvqoh",
@@ -4523,8 +4523,8 @@
         }
       ],
       "total": 9999,
-      "note": "Cash",
-      "terminal": "Counter 1"
+      "note": "UPI",
+      "terminal": "Counter 2"
     }
   ],
   "journal": [
@@ -6167,12 +6167,12 @@
       "debitAmt": 150
     },
     {
-      "id": "j_mtrjx33un9ngu",
+      "id": "j_mtrjx3y7snn7t",
       "date": "2026-09-07",
       "time": "11:35 PM",
-      "createdAt": "2026-09-07T18:05:40.985Z",
-      "desc": "Sale - Invoice #000192 to ahad [Cash] (Counter 1)",
-      "debitAcc": "Cash",
+      "createdAt": "2026-09-07T18:05:42.076Z",
+      "desc": "Sale - Invoice #000192 to Walk-in Customer [UPI] (Counter 2)",
+      "debitAcc": "Bank",
       "debitAmt": 9999,
       "creditAcc": "Sales",
       "creditAmt": 9999
